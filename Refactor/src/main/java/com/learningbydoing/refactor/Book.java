@@ -2,7 +2,12 @@ package com.learningbydoing.refactor;
 
 import java.io.Serializable;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public abstract class Book implements Serializable {
+
+	static final Logger logger = LogManager.getLogger(Book.class.getName());
 
 	private static final long serialVersionUID = 4643891220394093788L;
 
@@ -36,8 +41,12 @@ public abstract class Book implements Serializable {
 	 * @return
 	 */
 	public Double getPrice(Integer daysRented, Integer daysToDiscount) {
-		if (daysRented > daysToDiscount)
+		if (daysRented > daysToDiscount) {
+			logger.info("Number of days discounterd: {}", daysToDiscount);
 			return (daysRented - daysToDiscount) * price;
+		}
+		logger.warn("Price calculation defaulted, Because daysRented({}) < daysToDiscount({})", daysRented,
+				daysToDiscount);
 		return daysRented * price;
 
 	}
