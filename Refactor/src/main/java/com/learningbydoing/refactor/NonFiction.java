@@ -9,10 +9,6 @@ public class NonFiction extends Book {
 	}
 
 	public String getTitle() {
-		return title + " - NonFiction";
-	}
-
-	public Long getId() {
-		return id;
+		return new StringBuilder().append(title).append(" - NonFiction").toString();
 	}
 }

@@ -8,9 +8,8 @@
 		<artifactId>Java-Learning-Tasks</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>com.learningbydoing</groupId>
+	<groupId>com.learningbydoing.orm</groupId>
 	<artifactId>ORM</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>ORM</name>
 	<url>http://maven.apache.org</url>
 	<properties>

@@ -9,7 +9,7 @@ public class Fiction extends Book {
 	}
 
 	public String getTitle() {
-		return title + " - Fiction";
+		return new StringBuilder().append(title).append(" - Fiction").toString();
 	}
 
 }

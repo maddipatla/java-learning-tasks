@@ -12,7 +12,7 @@ public class Children extends Book {
 	}
 
 	public String getTitle() {
-		return title + " - Children";
+		return new StringBuilder().append(title).append(" - Children").toString();
 	}
 
 }

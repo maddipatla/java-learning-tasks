@@ -7,9 +7,8 @@
     <artifactId>Java-Learning-Tasks</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <groupId>com.learningbydoing</groupId>
+  <groupId>com.learningbydoing.db.modeling</groupId>
   <artifactId>DB-Modeling</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <name>DB-Modeling</name>
   <url>http://maven.apache.org</url>
   <properties>

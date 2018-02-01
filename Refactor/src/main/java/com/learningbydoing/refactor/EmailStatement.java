@@ -16,8 +16,7 @@ public class EmailStatement implements Statement {
 			Rental rental = iterator.next();
 			price += rental.getBook().getPrice(rental.getDaysRented(), rental.getDaysToDiscount());
 		}
-
-		return String.valueOf("Email Statement: " + price);
+		return new StringBuilder().append("Email Statement: ").append(price).toString();
 	}
 
 }

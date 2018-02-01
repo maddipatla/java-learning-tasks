@@ -8,9 +8,8 @@
 		<artifactId>Java-Learning-Tasks</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>com.learningbydoing</groupId>
+	<groupId>com.learningbydoing.config</groupId>
 	<artifactId>Config</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>Config</name>
 	<url>http://maven.apache.org</url>
 	<properties>

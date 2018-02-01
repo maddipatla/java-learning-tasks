@@ -17,8 +17,7 @@ public class PDFStatement implements Statement {
 			Rental rental = iterator.next();
 			price += rental.getBook().getPrice(rental.getDaysRented(), rental.getDaysToDiscount());
 		}
-
-		return String.valueOf("PDF Statement: " + price);
+		return new StringBuilder().append("PDF Statement: ").append(price).toString();
 	}
 
 }

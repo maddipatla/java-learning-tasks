@@ -1,0 +1,100 @@
+1 	Wal-Mart Stores, Inc 	5,514
+2 	Exxon Mobil Corporation 	3,789
+3 	Chevron Corporation 	8,652
+4 	Berkshire Hathaway Inc. 	171
+5 	Apple Inc. 	4,077
+6 	General Motors Company 	19,340
+7 	Phillips 66 	692
+8 	General Electric Company 	19,370
+9 	Ford Motor Company 	4,893
+10 	CVS Health 	5,967
+11 	McKesson Corporation 	5,735
+12 	AT&T 	18,809
+13 	Valero Marketing and Supply Company 	2,190
+14 	UnitedHealth Group 	9,552
+15 	Verizon Communications Inc. 	6,895
+16 	AmerisourceBergen 	1,718
+17 	Federal National Mortgage Association (Fannie Mae) 	1,058
+18 	Costco Wholesale Corporation 	2,144
+19 	HP Development Company, L.P. 	9,874
+20 	The Kroger Co. 	3,438
+21 	JPMorgan Chase & Co. 	21,289
+22 	Express Scripts Holding Company 	1,702
+24 	International Business Machines Corporation 	31,295
+25 	Marathon Petroleum Company 	674
+26 	Cardinal Health 	4,328
+27 	The Boeing Company 	11,765
+28 	Citigroup Incorporated 	14,804
+30 	Wells Fargo & Company 	32,157
+31 	Microsoft Corporation 	13,714
+32 	The Procter & Gamble Company 	6,026
+33 	The Home Depot, Inc 	3,196
+34 	Archer Daniels Midland Company 	1,412
+35 	Walgreens 	2,705
+36 	Target Corporation 	12
+36 	Target Corporation, Inc. 	8,304
+37 	Johnson & Johnson 	22,872
+38 	Anthem, Inc. 	4,281
+39 	MetLife Inc. 	9,355
+40 	Google, Inc. 	11,683
+41 	State Farm Insurance 	15,148
+42 	Federal Home Loan Mortgage Corporation (Freddie Mac) 	1,901
+43 	Comcast Corporation 	50,227
+44 	PepsiCo, Inc. 	10,883
+46 	American International Group (AIG) 	4,793
+47 	United Parcel Service, Inc. 	8,734
+48 	The Dow Chemical Company 	2,509
+49 	Aetna, Inc. 	7,381
+50 	Lowe's Companies, Inc. 	2,233
+51 	ConocoPhillips 	1,529
+53 	Energy Transfer Partners, L.P. 	2,118
+54 	Caterpillar Inc. 	2,955
+55 	Prudential Financial, Incorporated 	7,579
+56 	Pfizer Incorporated 	12,273
+57 	The Walt Disney Company 	9,789
+58 	Humana Inc. 	3,596
+59 	Enterprise Products Partners L.P. 	640
+60 	Cisco Systems, Inc. 	17,821
+61 	SYSCO Corporation 	3,011
+62 	Ingram Micro Inc. 	2,599
+63 	The Coca-Cola Company 	5,075
+64 	Lockheed Martin Corporation 	11,260
+65 	FedEx Corporation 	9,442
+66 	Johnson Controls, Inc. 	3,337
+67 	Plains All American Pipeline, L.P. 	514
+68 	World Fuel Services Corporation 	641
+69 	CHS, Inc. 	677
+70 	American Airlines 	7,523
+71 	Merck & Co., Inc. 	11,295
+72 	Best Buy Co. Inc. 	3,412
+73 	Delta Air Lines, Inc. 	7,025
+74 	Honeywell 	23
+74 	Honeywell International Inc. 	15,381
+75 	HCA Holdings, Inc. 	17,889
+76 	Goldman Sachs 	8,010
+77 	Andeavor, Inc. 	1,369
+78 	Liberty Mutual Insurance Company 	12,447
+79 	United Continental Holdings 	0
+80 	New York Life Insurance Company 	14,098
+81 	Oracle Corporation 	24,292
+82 	Morgan Stanley 	11,092
+83 	Tyson Foods, Inc. 	2,810
+84 	Safeway, Inc. 	1,959
+85 	Nationwide Mutual Insurance Company 	7,231
+86 	John Deere Company 	6,407
+87 	DuPont 	2,305
+88 	American Express Company 	8,116
+89 	Allstate Insurance Company 	14,894
+90 	CIGNA Corporation 	6,389
+91 	Mondelez International Inc 	6,291
+92 	TIAA 	5,494
+93 	INTL FCStone Inc. 	539
+94 	Massachusetts Mutual Financial Group 	5,076
+95 	DIRECTV 	1,142
+96 	Halliburton Company 	2,718
+97 	21st Century Fox 	170
+98 	3M Company 	6,015
+99 	Sears Holdings Corporation 	1,933
+100 	general Dynamics Mission Systems 	100
+100 	General Dynamics Corporation 	1,363
+101 	Publix Super Markets, Inc. 	1,357

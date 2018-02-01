@@ -8,9 +8,8 @@
 		<artifactId>Java-Learning-Tasks</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>com.learningbydoing</groupId>
+	<groupId>com.learningbydoing.spring</groupId>
 	<artifactId>Spring</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>Spring</name>
 	<url>http://maven.apache.org</url>
 	<properties>
