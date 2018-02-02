@@ -29,8 +29,4 @@ public class SplitFileByNLines {
 			;
 		logger.info("Time taken is: {} milliseconds.", System.currentTimeMillis() - startTime);
 	}
-
-	public static void main(String[] args) {
-		new SplitFileByNLines(null, 1000L, "/home/chandrab/tmp/task1").split();
-	}
 }
