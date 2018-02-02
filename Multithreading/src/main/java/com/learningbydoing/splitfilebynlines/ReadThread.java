@@ -32,8 +32,9 @@ public class ReadThread implements Runnable {
 				stream = Files.lines(Paths.get(filePath));
 			} else {
 				stream = Files.lines(Paths.get(getClass().getClassLoader().getResource(DEFAULT_FILE).toURI()));
-				logger.info("filePath may null: {} OR doesn't exist. So taking default file: {}", filePath,
-						DEFAULT_FILE);
+				logger.info(
+						"filePath may null: {} OR doesn't exist. Please make sure you specify file name with extension. Taking default file: {}",
+						filePath, DEFAULT_FILE);
 			}
 			stream.forEach(s -> queue.add(s));
 			isAllLinesQueued = true;
