@@ -24,15 +24,18 @@ public class WikiCall {
 	public static final String DEFAULT_FILE_TWO = "Multithreading_Task2_ProgrammingLanguages.txt";
 	public static final String DEFAULT_FILE_THREE = "Multithreading_Task_2_java Keywords.txt";
 
+	private static final String WIKI_DEFAULT_URL_STRING = "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=";
 	private static final String DEFAULT_DELIMETER = "\\s{2}";
 	private Path filePath;
 	private String delimeter = null;
 	private Integer position = -1;
 	private Path outputFilePath;
+	private String wikiURLString;
 
 	public WikiCall() {
 		try {
 			this.filePath = Paths.get(getClass().getClassLoader().getResource(DEFAULT_FILE_TWO).toURI());
+			this.wikiURLString = WIKI_DEFAULT_URL_STRING;
 			StringBuilder builder = new StringBuilder(System.getProperty("user.dir"));
 			builder.append(File.separator);
 			builder.append("task2");
@@ -105,7 +108,7 @@ public class WikiCall {
 	public void makeWikiCallAndWriteToFiles(List<String> strings) {
 		ExecutorService service = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 20);
 		for (String string : strings) {
-			service.execute(new WikiCallThread(string, outputFilePath));
+			service.execute(new WikiCallThread(string, wikiURLString, outputFilePath));
 		}
 		service.shutdown();
 		while (!service.isTerminated())

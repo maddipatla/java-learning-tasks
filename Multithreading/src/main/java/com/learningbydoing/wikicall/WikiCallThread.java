@@ -28,18 +28,18 @@ public class WikiCallThread implements Runnable {
 	static final Logger logger = LogManager.getLogger(WikiCallThread.class.getName());
 	private String wikiString;
 	private Path outputFilePath;
+	private String wikiURLString;
 
-	public WikiCallThread(String wikiString, Path outputFilePath) {
+	public WikiCallThread(String wikiString, String wikiURLString, Path outputFilePath) {
 		this.wikiString = wikiString;
+		this.wikiURLString = wikiURLString;
 		this.outputFilePath = outputFilePath;
 	}
 
 	public void run() {
 		try {
 			String queryString = URLEncoder.encode(wikiString, "UTF-8");
-			URL url = new URL(
-					"https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles="
-							+ queryString);
+			URL url = new URL(wikiURLString + queryString);
 			HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
 			connection.setRequestMethod("GET");
 			connection.setRequestProperty("Accept", "application/json");
