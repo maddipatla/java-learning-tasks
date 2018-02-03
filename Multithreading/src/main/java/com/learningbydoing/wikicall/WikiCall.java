@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.Future;
 
 import org.apache.commons.io.FilenameUtils;
@@ -24,16 +25,21 @@ public class WikiCall {
 	public static final String DEFAULT_FILE_TWO = "Multithreading_Task2_ProgrammingLanguages.txt";
 	public static final String DEFAULT_FILE_THREE = "Multithreading_Task_2_java Keywords.txt";
 
-	private static final String WIKI_DEFAULT_URL_STRING = "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=";
+	public static final String WIKI_DEFAULT_URL_STRING = "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=";
 	private static final String DEFAULT_DELIMETER = "\\s{2}";
+
+	static ForkJoinPool pool = new ForkJoinPool(Runtime.getRuntime().availableProcessors() * 20);
+
 	private Path filePath;
 	private String delimeter = null;
 	private Integer position = -1;
 	private Path outputFilePath;
 	private String wikiURLString;
+	private boolean useForkJoin;
 
-	public WikiCall() {
+	public WikiCall(boolean useForkJoin) {
 		try {
+			this.useForkJoin = useForkJoin;
 			this.filePath = Paths.get(getClass().getClassLoader().getResource(DEFAULT_FILE_TWO).toURI());
 			this.wikiURLString = WIKI_DEFAULT_URL_STRING;
 			StringBuilder builder = new StringBuilder(System.getProperty("user.dir"));
@@ -41,13 +47,15 @@ public class WikiCall {
 			builder.append("task2");
 			builder.append(File.separator);
 			this.outputFilePath = Paths.get(builder.toString());
-			Files.createDirectory(this.outputFilePath);
+			if (!Files.exists(Paths.get(outputFilePath.toUri())))
+				Files.createDirectory(this.outputFilePath);
 		} catch (URISyntaxException | IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public WikiCall(String filePath, String outputFilePath) {
+	public WikiCall(String filePath, String outputFilePath, boolean useForkJoin) {
+		this.useForkJoin = useForkJoin;
 		if (filePath != null && outputFilePath != null) {
 			if (FilenameUtils.getExtension(filePath).isEmpty())
 				throw new RuntimeException("You must specify file extension");
@@ -64,23 +72,26 @@ public class WikiCall {
 		// path exists");
 	}
 
-	public WikiCall(String filePath, String delimeter, String outputFilePath) {
-		this(filePath, outputFilePath);
+	public WikiCall(String filePath, String delimeter, String outputFilePath, boolean useForkJoin) {
+		this(filePath, outputFilePath, useForkJoin);
 		if (delimeter.trim().isEmpty())
 			this.delimeter = DEFAULT_DELIMETER;
 		else
 			this.delimeter = delimeter;
 	}
 
-	public WikiCall(String filePath, String delimeter, Integer position, String outputFilePath) {
-		this(filePath, delimeter, outputFilePath);
+	public WikiCall(String filePath, String delimeter, Integer position, String outputFilePath, boolean useForkJoin) {
+		this(filePath, delimeter, outputFilePath, useForkJoin);
 		this.position = position;
 	}
 
 	public void fetchStringsMakeWikiCallAndWrite() {
 		Long startTime = System.currentTimeMillis();
 		List<String> strings = getExtractedStrings();
-		makeWikiCallAndWriteToFiles(strings);
+		if (useForkJoin)
+			pool.invoke(new WikiCallRecursiveAction(strings, wikiURLString, outputFilePath));
+		else
+			makeWikiCallAndWriteToFiles(strings);
 		logger.info("Time taken: {}", System.currentTimeMillis() - startTime);
 	}
 
@@ -113,5 +124,9 @@ public class WikiCall {
 		service.shutdown();
 		while (!service.isTerminated())
 			;
+	}
+
+	public static void main(String[] args) {
+		new WikiCall(true).fetchStringsMakeWikiCallAndWrite();
 	}
 }
