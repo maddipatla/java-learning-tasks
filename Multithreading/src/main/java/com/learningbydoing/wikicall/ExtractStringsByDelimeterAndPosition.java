@@ -9,12 +9,16 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 
-public class ThreadToExtractStringsByNewLine implements Callable<List<String>> {
+public class ExtractStringsByDelimeterAndPosition implements Callable<List<String>> {
 
 	private String filePath;
+	private String delimeter;
+	private Integer positionOfString;
 
-	public ThreadToExtractStringsByNewLine(String filePath) {
+	public ExtractStringsByDelimeterAndPosition(String filePath, String delimeter, Integer positionOfString) {
 		this.filePath = filePath;
+		this.delimeter = delimeter;
+		this.positionOfString = positionOfString;
 	}
 
 	@Override
@@ -22,16 +26,11 @@ public class ThreadToExtractStringsByNewLine implements Callable<List<String>> {
 		List<String> strings = new ArrayList<>();
 		try {
 			strings.addAll(Files.lines(Paths.get(getClass().getClassLoader().getResource(filePath).toURI()))
+					.map(string -> string.split(delimeter)).map(array -> array[positionOfString - 1])
 					.filter(string -> !string.isEmpty() && !string.equalsIgnoreCase("")).collect(Collectors.toList()));
 		} catch (IOException | URISyntaxException e) {
 			e.printStackTrace();
 		}
 		return strings;
-	}
-
-	public static void main(String[] args) {
-		List<String> strings = new ArrayList<>();
-		strings.add("");
-		System.out.println(strings.contains(""));
 	}
 }

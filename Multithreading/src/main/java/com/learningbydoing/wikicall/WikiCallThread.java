@@ -1,12 +1,14 @@
 package com.learningbydoing.wikicall;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
@@ -25,9 +27,11 @@ public class WikiCallThread implements Runnable {
 
 	static final Logger logger = LogManager.getLogger(WikiCallThread.class.getName());
 	private String wikiString;
+	private Path outputFilePath;
 
-	public WikiCallThread(String wikiString) {
+	public WikiCallThread(String wikiString, Path outputFilePath) {
 		this.wikiString = wikiString;
+		this.outputFilePath = outputFilePath;
 	}
 
 	public void run() {
@@ -57,8 +61,8 @@ public class WikiCallThread implements Runnable {
 			if (description != null) {
 				list.add(description.toString());
 				String title = descriptionMap.get("title").toString().replaceAll("[^a-zA-Z0-9\\s]", "").trim();
-				Files.write(Paths.get("task2/" + title), list, StandardCharsets.UTF_8, StandardOpenOption.CREATE,
-						StandardOpenOption.APPEND);
+				Files.write(Paths.get(outputFilePath + File.separator + title), list, StandardCharsets.UTF_8,
+						StandardOpenOption.CREATE, StandardOpenOption.APPEND);
 			} else
 				logger.warn("don't find description for the given word: {}", wikiString);
 			connection.disconnect();

@@ -9,19 +9,12 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 
-public class ThreadToExtractStringsByDelimeterAndPosition implements Callable<List<String>> {
+public class ExtractStringsByNewLine implements Callable<List<String>> {
 
 	private String filePath;
-	private String delimeter;
-	private Integer positionOfString;
 
-	public ThreadToExtractStringsByDelimeterAndPosition(String filePath, String delimeter, Integer positionOfString) {
+	public ExtractStringsByNewLine(String filePath) {
 		this.filePath = filePath;
-		if (delimeter.trim().isEmpty())
-			this.delimeter = "\\s{2}";
-		else
-			this.delimeter = delimeter;
-		this.positionOfString = positionOfString;
 	}
 
 	@Override
@@ -29,11 +22,16 @@ public class ThreadToExtractStringsByDelimeterAndPosition implements Callable<Li
 		List<String> strings = new ArrayList<>();
 		try {
 			strings.addAll(Files.lines(Paths.get(getClass().getClassLoader().getResource(filePath).toURI()))
-					.map(string -> string.split(delimeter)).map(array -> array[positionOfString - 1])
 					.filter(string -> !string.isEmpty() && !string.equalsIgnoreCase("")).collect(Collectors.toList()));
 		} catch (IOException | URISyntaxException e) {
 			e.printStackTrace();
 		}
 		return strings;
+	}
+
+	public static void main(String[] args) {
+		List<String> strings = new ArrayList<>();
+		strings.add("");
+		System.out.println(strings.contains(""));
 	}
 }

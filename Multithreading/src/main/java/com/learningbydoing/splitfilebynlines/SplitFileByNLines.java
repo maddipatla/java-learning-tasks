@@ -16,7 +16,7 @@ import org.apache.logging.log4j.Logger;
 public class SplitFileByNLines {
 	final static Logger logger = LogManager.getLogger(SplitFileByNLines.class.getName());
 
-	final String DEFAULT_FILE = "Multithreading_Task1_Books.csv";
+	private final String DEFAULT_FILE = "Multithreading_Task1_Books.csv";
 
 	private Path filePath;
 	private Long splitNumber;
