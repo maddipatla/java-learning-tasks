@@ -3,18 +3,20 @@ package com.learningbydoing.splitfilebynlines;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
 public class WriteThread implements Runnable {
+
 	private Long numberOfLines;
 	private Long counter = 1L;
 	private Long fileCounter = 1L;
-	private String outputFilePath;
+	private Path outputFilePath;
 
-	public WriteThread(Long numberOfLines, String outputFilePath) {
+	public WriteThread(Long numberOfLines, Path outputFilePath) {
 		this.numberOfLines = numberOfLines;
 		this.outputFilePath = outputFilePath;
 	}

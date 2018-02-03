@@ -1,10 +1,10 @@
 package com.learningbydoing.splitfilebynlines;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -15,12 +15,14 @@ import org.apache.logging.log4j.Logger;
 
 public class ReadThread implements Runnable {
 	static final Logger logger = LogManager.getLogger(ReadThread.class.getName());
-	static BlockingQueue<String> queue = new LinkedBlockingQueue<>();
+
 	final static String DEFAULT_FILE = "Multithreading_Task1_Books.csv";
-	private String filePath;
+
+	static BlockingQueue<String> queue = new LinkedBlockingQueue<>();
+	private Path filePath;
 	public static boolean isAllLinesQueued = false;
 
-	public ReadThread(String filePath) {
+	public ReadThread(Path filePath) {
 		this.filePath = filePath;
 	}
 
@@ -28,8 +30,8 @@ public class ReadThread implements Runnable {
 	public void run() {
 		try {
 			Stream<String> stream;
-			if (filePath != null && new File(filePath).exists()) {
-				stream = Files.lines(Paths.get(filePath));
+			if (filePath != null && Files.exists(filePath)) {
+				stream = Files.lines(filePath);
 			} else {
 				stream = Files.lines(Paths.get(getClass().getClassLoader().getResource(DEFAULT_FILE).toURI()));
 				logger.info(
@@ -39,13 +41,12 @@ public class ReadThread implements Runnable {
 			stream.forEach(s -> queue.add(s));
 			isAllLinesQueued = true;
 		} catch (NoSuchFileException | NullPointerException npe) {
-
+			npe.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 }
