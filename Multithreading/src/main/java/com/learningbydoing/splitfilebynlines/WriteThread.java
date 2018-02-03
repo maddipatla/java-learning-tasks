@@ -1,5 +1,6 @@
 package com.learningbydoing.splitfilebynlines;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -33,8 +34,8 @@ public class WriteThread implements Runnable {
 					counter++;
 				}
 				counter = 1L;
-				Files.write(Paths.get(outputFilePath + "/File-" + fileCounter++), strings, StandardCharsets.UTF_8,
-						StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+				Files.write(Paths.get(outputFilePath + File.separator + "File-" + fileCounter++), strings,
+						StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
 				strings.clear();
 			} while (!ReadThread.queue.isEmpty());
 		} catch (InterruptedException | IOException e) {
