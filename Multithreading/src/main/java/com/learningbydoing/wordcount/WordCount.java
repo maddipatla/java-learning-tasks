@@ -13,8 +13,6 @@ import java.util.concurrent.Executors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.learningbydoing.wikicall.WordCountThread;
-
 public class WordCount {
 	static final Logger logger = LogManager.getLogger(WordCount.class.getName());
 	private static final String DEFAULT_PATH = "/home/chandrab/Pramati/Workspace/Java/Learning-Java-By-Doing/Java-Learning-Tasks/Multithreading/task2";
@@ -64,10 +62,4 @@ public class WordCount {
 		logger.info("Time taken: {}", System.currentTimeMillis() - startTime);
 	}
 
-	public static void main(String[] args) {
-		new WordCount(
-				"/home/chandrab/Pramati/Workspace/Java/Learning-Java-By-Doing/Java-Learning-Tasks/Multithreading/task2",
-				"/home/chandrab/Pramati/Workspace/Java/Learning-Java-By-Doing/Java-Learning-Tasks/Multithreading/task2")
-						.processWordCount();
-	}
 }

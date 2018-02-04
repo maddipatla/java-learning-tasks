@@ -1,4 +1,4 @@
-package com.learningbydoing.wikicall;
+package com.learningbydoing.wordcount;
 
 import java.io.IOException;
 import java.nio.file.Files;
