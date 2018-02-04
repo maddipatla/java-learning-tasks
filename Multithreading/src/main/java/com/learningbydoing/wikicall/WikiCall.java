@@ -54,8 +54,9 @@ public class WikiCall {
 		}
 	}
 
-	public WikiCall(String filePath, String outputFilePath, boolean useForkJoin) {
+	public WikiCall(String filePath, String outputFilePath, boolean useForkJoin, String wikiURLString) {
 		this.useForkJoin = useForkJoin;
+		this.wikiURLString = wikiURLString;
 		if (filePath != null && outputFilePath != null) {
 			if (FilenameUtils.getExtension(filePath).isEmpty())
 				throw new RuntimeException("You must specify file extension");
@@ -72,16 +73,18 @@ public class WikiCall {
 		// path exists");
 	}
 
-	public WikiCall(String filePath, String delimeter, String outputFilePath, boolean useForkJoin) {
-		this(filePath, outputFilePath, useForkJoin);
+	public WikiCall(String filePath, String delimeter, String outputFilePath, boolean useForkJoin,
+			String wikiURLString) {
+		this(filePath, outputFilePath, useForkJoin, wikiURLString);
 		if (delimeter.trim().isEmpty())
 			this.delimeter = DEFAULT_DELIMETER;
 		else
 			this.delimeter = delimeter;
 	}
 
-	public WikiCall(String filePath, String delimeter, Integer position, String outputFilePath, boolean useForkJoin) {
-		this(filePath, delimeter, outputFilePath, useForkJoin);
+	public WikiCall(String filePath, String delimeter, Integer position, String outputFilePath, boolean useForkJoin,
+			String wikiURLString) {
+		this(filePath, delimeter, outputFilePath, useForkJoin, wikiURLString);
 		this.position = position;
 	}
 
@@ -124,9 +127,5 @@ public class WikiCall {
 		service.shutdown();
 		while (!service.isTerminated())
 			;
-	}
-
-	public static void main(String[] args) {
-		new WikiCall(true).fetchStringsMakeWikiCallAndWrite();
 	}
 }
