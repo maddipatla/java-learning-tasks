@@ -8,6 +8,7 @@ public class NonFiction extends Book {
 		super(id, title, price);
 	}
 
+	@Override
 	public String getTitle() {
 		return new StringBuilder().append(title).append(" - NonFiction").toString();
 	}

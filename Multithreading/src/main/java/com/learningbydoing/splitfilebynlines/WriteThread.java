@@ -10,7 +10,11 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class WriteThread implements Runnable {
+	static final Logger logger = LogManager.getLogger(WriteThread.class.getName());
 
 	private Long numberOfLines;
 	private Long counter = 1L;
@@ -28,7 +32,7 @@ public class WriteThread implements Runnable {
 			do {
 				List<String> strings = new ArrayList<>();
 				while (numberOfLines >= counter) {
-					if (ReadThread.queue.isEmpty() && ReadThread.isAllLinesQueued)
+					if (ReadThread.queue.isEmpty() && ReadThread.isAllLinesQueued())
 						break;
 					strings.add(ReadThread.queue.take());
 					counter++;
@@ -39,7 +43,7 @@ public class WriteThread implements Runnable {
 				strings.clear();
 			} while (!ReadThread.queue.isEmpty());
 		} catch (InterruptedException | IOException e) {
-			e.printStackTrace();
+			logger.warn("Exception in WriteThread.run(): {}", e.getMessage());
 		}
 
 	}

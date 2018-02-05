@@ -10,9 +10,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ExtractStringsByDelimeter implements Callable<List<String>> {
-
+	static final Logger logger = LogManager.getLogger(ExtractStringsByDelimeter.class.getName());
 	private Path filePath;
 	private String delimeter;
 
@@ -24,12 +28,12 @@ public class ExtractStringsByDelimeter implements Callable<List<String>> {
 	@Override
 	public List<String> call() throws Exception {
 		List<String> strings = new ArrayList<>();
-		try {
-			strings.addAll(Files.lines(Paths.get(getClass().getClassLoader().getResource(filePath.toString()).toURI()))
-					.map(string -> string.split(delimeter)).flatMap(x -> Arrays.stream(x))
+		try (Stream<String> stream = Files
+				.lines(Paths.get(getClass().getClassLoader().getResource(filePath.toString()).toURI()))) {
+			strings.addAll(stream.map(string -> string.split(delimeter)).flatMap(x -> Arrays.stream(x))
 					.filter(string -> !string.isEmpty() && !string.equalsIgnoreCase("")).collect(Collectors.toList()));
 		} catch (IOException | URISyntaxException e) {
-			e.printStackTrace();
+			logger.error("Exception in ExtractStringsByDelimeter.call(): {}", e.getMessage());
 		}
 		return strings;
 	}

@@ -47,10 +47,10 @@ public class WikiCall {
 			builder.append("task2");
 			builder.append(File.separator);
 			this.outputFilePath = Paths.get(builder.toString());
-			if (!Files.exists(Paths.get(outputFilePath.toUri())))
+			if (!Paths.get(outputFilePath.toUri()).toFile().exists())
 				Files.createDirectory(this.outputFilePath);
 		} catch (URISyntaxException | IOException e) {
-			e.printStackTrace();
+			logger.warn("Exception in WikiCall(): {}", e.getMessage());
 		}
 	}
 
@@ -59,18 +59,15 @@ public class WikiCall {
 		this.wikiURLString = wikiURLString;
 		if (filePath != null && outputFilePath != null) {
 			if (FilenameUtils.getExtension(filePath).isEmpty())
-				throw new RuntimeException("You must specify file extension");
+				throw new NoFileExtensionException("You must specify file extension");
 			this.filePath = Paths.get(filePath);
 			this.outputFilePath = Paths.get(outputFilePath);
-			if ((!Files.exists(this.filePath) && !Files.isRegularFile(this.filePath))
-					|| (!Files.exists(this.outputFilePath) && !Files.isDirectory(this.outputFilePath)))
-				throw new RuntimeException("File path or output file directory doesn't exist");
+			if ((!this.filePath.toFile().exists() && !this.filePath.toFile().isFile())
+					|| (!this.outputFilePath.toFile().exists() && !this.outputFilePath.toFile().isDirectory()))
+				throw new NoPathExistException("File path or output file directory doesn't exist");
 
 		} else
-			throw new RuntimeException("File path or output file directory can't be null");
-		// if (Files.exists(this.filePath) && Files.exists(this.outputFilePath))
-		// throw new RuntimeException("File Path doesn't exist. Please make sure file
-		// path exists");
+			throw new NoPathExistException("File path or output file directory can't be null");
 	}
 
 	public WikiCall(String filePath, String delimeter, String outputFilePath, boolean useForkJoin,
@@ -111,11 +108,12 @@ public class WikiCall {
 		try {
 			strings.addAll(future.get());
 		} catch (InterruptedException | ExecutionException e) {
-			e.printStackTrace();
+			logger.warn("Exception in WikiCall.getExtractedStrings: {}", e.getMessage());
 		}
 		serviceToGetStrings.shutdown();
-		while (!serviceToGetStrings.isTerminated())
-			;
+		while (!serviceToGetStrings.isTerminated()) {
+			logger.info("Waiting for all threads to be finished with their work and executorService is shutdown");
+		}
 		return strings;
 	}
 
@@ -125,7 +123,8 @@ public class WikiCall {
 			service.execute(new WikiCallThread(string, wikiURLString, outputFilePath));
 		}
 		service.shutdown();
-		while (!service.isTerminated())
-			;
+		while (!service.isTerminated()) {
+			logger.info("Waiting for all threads to be finished with their work and executorService is shutdown");
+		}
 	}
 }

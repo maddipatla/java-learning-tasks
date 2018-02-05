@@ -48,8 +48,9 @@ public class WordCount {
 			e.printStackTrace();
 		}
 		executorService.shutdown();
-		while (!executorService.isTerminated())
-			;
+		while (!executorService.isTerminated()) {
+			logger.info("Waiting for all threads to be finished with their work and executorService is shutdown");
+		}
 		try {
 			Files.write(Paths.get(outputFilePath + File.separator + "WordCount"),
 					() -> WordCountThread.wordCount.entrySet().stream()

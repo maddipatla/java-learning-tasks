@@ -14,9 +14,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class SplitFileByNLines {
-	final static Logger logger = LogManager.getLogger(SplitFileByNLines.class.getName());
+	static final Logger logger = LogManager.getLogger(SplitFileByNLines.class.getName());
 
-	private final String DEFAULT_FILE = "Multithreading_Task1_Books.csv";
+	private static final String DEFAULT_FILE = "Multithreading_Task1_Books.csv";
 
 	private Path filePath;
 	private Long splitNumber;
@@ -33,7 +33,7 @@ public class SplitFileByNLines {
 			Files.createDirectory(this.outputFilePath);
 			this.splitNumber = 1000L;
 		} catch (URISyntaxException | IOException e) {
-			e.printStackTrace();
+			logger.warn("Exception in SplitFileByNLines(): {}", e.getMessage());
 		}
 	}
 
@@ -61,8 +61,9 @@ public class SplitFileByNLines {
 		service.execute(new ReadThread(filePath));
 		service.execute(new WriteThread(splitNumber, outputFilePath));
 		service.shutdown();
-		while (!service.isTerminated())
-			;
+		while (!service.isTerminated()) {
+			logger.info("Waiting for all threads to be finished with their work and executorService is shutdown");
+		}
 		logger.info("Time taken is: {} milliseconds.", System.currentTimeMillis() - startTime);
 	}
 

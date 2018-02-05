@@ -15,7 +15,7 @@ public class ReadThread implements Runnable {
 
 	static BlockingQueue<String> queue = new LinkedBlockingQueue<>();
 	private Path filePath;
-	public static boolean isAllLinesQueued = false;
+	private static boolean isAllLinesQueued = false;
 
 	public ReadThread(Path filePath) {
 		this.filePath = filePath;
@@ -26,9 +26,12 @@ public class ReadThread implements Runnable {
 		try (Stream<String> stream = Files.lines(filePath)) {
 			stream.forEach(s -> queue.add(s));
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.warn("Exception in ReadThread.run(): {}", e.getMessage());
 		}
-		isAllLinesQueued = true;
+		ReadThread.isAllLinesQueued = true;
 	}
 
+	public static boolean isAllLinesQueued() {
+		return isAllLinesQueued;
+	}
 }

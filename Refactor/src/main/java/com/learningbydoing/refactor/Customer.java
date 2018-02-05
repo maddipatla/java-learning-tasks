@@ -12,7 +12,7 @@ public class Customer implements Serializable {
 
 	private String name;
 
-	private List<Rental> rentals = new ArrayList<Rental>();
+	private List<Rental> rentals = new ArrayList<>();
 
 	public Customer(Integer id, String name, List<Rental> rentals) {
 		super();

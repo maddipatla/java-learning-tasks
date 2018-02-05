@@ -8,6 +8,7 @@ public class Fiction extends Book {
 		super(id, title, price);
 	}
 
+	@Override
 	public String getTitle() {
 		return new StringBuilder().append(title).append(" - Fiction").toString();
 	}

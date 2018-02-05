@@ -8,9 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ExtractStringsByDelimeterAndPosition implements Callable<List<String>> {
-
+	static final Logger logger = LogManager.getLogger(ExtractStringsByDelimeterAndPosition.class.getName());
 	private String filePath;
 	private String delimeter;
 	private Integer positionOfString;
@@ -24,12 +28,12 @@ public class ExtractStringsByDelimeterAndPosition implements Callable<List<Strin
 	@Override
 	public List<String> call() throws Exception {
 		List<String> strings = new ArrayList<>();
-		try {
-			strings.addAll(Files.lines(Paths.get(getClass().getClassLoader().getResource(filePath).toURI()))
-					.map(string -> string.split(delimeter)).map(array -> array[positionOfString - 1])
+		try (Stream<String> stream = Files
+				.lines(Paths.get(getClass().getClassLoader().getResource(filePath).toURI()))) {
+			strings.addAll(stream.map(string -> string.split(delimeter)).map(array -> array[positionOfString - 1])
 					.filter(string -> !string.isEmpty() && !string.equalsIgnoreCase("")).collect(Collectors.toList()));
 		} catch (IOException | URISyntaxException e) {
-			e.printStackTrace();
+			logger.warn("Exception in ExtractStringsByDelimeterAndPosition.call(): {}", e.getMessage());
 		}
 		return strings;
 	}
