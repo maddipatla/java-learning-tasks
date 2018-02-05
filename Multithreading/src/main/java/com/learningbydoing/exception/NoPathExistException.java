@@ -1,4 +1,4 @@
-package com.learningbydoing.wikicall;
+package com.learningbydoing.exception;
 
 public class NoPathExistException extends RuntimeException {
 

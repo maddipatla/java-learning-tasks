@@ -18,6 +18,9 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.learningbydoing.exception.NoFileExtensionException;
+import com.learningbydoing.exception.NoPathExistException;
+
 public class WikiCall {
 	static final Logger logger = LogManager.getLogger(WikiCall.class.getName());
 

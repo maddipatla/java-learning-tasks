@@ -78,17 +78,31 @@ public class Person {
 		this.isScheduled = isScheduled;
 	}
 
+	@Override
+	public String toString() {
+		return "Person [name=" + name + ", emailId=" + emailId + ", phoneNo=" + phoneNo + ", inTime=" + inTime
+				+ ", availableForInterview=" + availableForInterview + ", isScheduled=" + isScheduled + "]";
+	}
+
 	public static List<Person> getScheduledPersons() {
 		List<Person> persons = new ArrayList<>();
 		LocalTime time = LocalTime.parse("08:00");
 		for (int i = 1; i <= 20; i++) {
-			persons.add(new Person("Person-" + i, "person-" + i + "@mail.com", 9191918231L + i, time, false, true));
+			persons.add(
+					new Person("Person-" + i, "person-" + i + "@mail.com", 9191918231L + i, time, i % 2 == 0, true));
 			time = time.plus(2, ChronoUnit.MINUTES);
 		}
 		return persons;
 	}
 
-	public static void main(String[] args) {
-		getScheduledPersons();
+	public static List<Person> getUnscheduledPersons() {
+		List<Person> persons = new ArrayList<>();
+		LocalTime time = LocalTime.parse("10:00");
+		for (int i = 21; i <= 100; i++) {
+			persons.add(
+					new Person("Person-" + i, "person-" + i + "@mail.com", 9191918231L + i, time, i % 2 == 1, false));
+			time = time.plus(2, ChronoUnit.MINUTES);
+		}
+		return persons;
 	}
 }

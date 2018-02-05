@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.learningbydoing.wikicall.NoPathExistException;
+import com.learningbydoing.exception.NoPathExistException;
 
 public class WordCount {
 	static final Logger logger = LogManager.getLogger(WordCount.class.getName());
