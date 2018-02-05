@@ -82,6 +82,6 @@ public class LRUCache {
 	}
 
 	private Employee getEmployeeFromDB(Integer key) {
-		return new Employee(key, "Employee-" + key, new Double(key * 5));
+		return new Employee(key, "Employee-" + key, Double.valueOf(key * 5d));
 	}
 }

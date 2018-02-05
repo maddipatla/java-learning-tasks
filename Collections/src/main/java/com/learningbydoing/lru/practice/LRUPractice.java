@@ -4,7 +4,7 @@ public class LRUPractice {
 	private Integer noOfPages;
 	private Node rear;
 	private Node front;
-	private static Integer noOfHits = 0;
+	private Integer noOfHits = 0;
 	private Integer listSize = 0;
 
 	public LRUPractice(Integer noOfPages) {

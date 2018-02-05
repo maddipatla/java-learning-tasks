@@ -28,10 +28,15 @@ public class ReadThread implements Runnable {
 		} catch (IOException e) {
 			logger.warn("Exception in ReadThread.run(): {}", e.getMessage());
 		}
-		ReadThread.isAllLinesQueued = true;
+		setAllLinesQueued(true);
 	}
 
 	public static boolean isAllLinesQueued() {
 		return isAllLinesQueued;
 	}
+
+	public static void setAllLinesQueued(boolean isAllLinesQueued) {
+		ReadThread.isAllLinesQueued = isAllLinesQueued;
+	}
+
 }

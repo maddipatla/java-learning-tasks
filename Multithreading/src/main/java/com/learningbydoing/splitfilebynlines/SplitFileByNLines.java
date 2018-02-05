@@ -13,6 +13,9 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.learningbydoing.exception.NoFileExtensionException;
+import com.learningbydoing.exception.NoPathExistException;
+
 public class SplitFileByNLines {
 	static final Logger logger = LogManager.getLogger(SplitFileByNLines.class.getName());
 
@@ -41,18 +44,15 @@ public class SplitFileByNLines {
 		this.splitNumber = splitNumber;
 		if (filePath != null && outputFilePath != null) {
 			if (FilenameUtils.getExtension(filePath).isEmpty())
-				throw new RuntimeException("You must specify file extension");
+				throw new NoFileExtensionException("You must specify file extension");
 			this.filePath = Paths.get(filePath);
 			this.outputFilePath = Paths.get(outputFilePath);
-			if ((!Files.exists(this.filePath) && !Files.isRegularFile(this.filePath))
-					|| (!Files.exists(this.outputFilePath) && !Files.isDirectory(this.outputFilePath)))
-				throw new RuntimeException("File path or output file directory doesn't exist");
+			if ((!this.filePath.toFile().exists() && !this.filePath.toFile().isFile())
+					|| (!this.outputFilePath.toFile().exists() && !this.outputFilePath.toFile().isDirectory()))
+				throw new NoPathExistException("File path or output file directory doesn't exist");
 
 		} else
-			throw new RuntimeException("File path or output file directory can't be null");
-		// if (Files.exists(this.filePath) && Files.exists(this.outputFilePath))
-		// throw new RuntimeException("File Path doesn't exist. Please make sure file
-		// path exists");
+			throw new NoPathExistException("File path or output file directory can't be null");
 	}
 
 	public void split() {

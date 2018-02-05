@@ -45,9 +45,7 @@ public class WordCount {
 		ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 20);
 
 		try (Stream<Path> paths = Files.walk(filesPath)) {
-			paths.filter(Files::isRegularFile).forEach(file -> {
-				executorService.execute(new WordCountThread(file));
-			});
+			paths.filter(Files::isRegularFile).forEach(file -> executorService.execute(new WordCountThread(file)));
 		} catch (IOException e) {
 			logger.warn("Exception in WordCount.processWordCount(): {}", e.getMessage());
 		}
@@ -59,7 +57,7 @@ public class WordCount {
 
 		try {
 			Files.write(Paths.get(outputFilePath + File.separator + "WordCount"),
-					() -> WordCountThread.wordCount.entrySet().stream()
+					() -> WordCountThread.getWordCount().entrySet().stream()
 							.<CharSequence>map(e -> e.getKey() + " = " + e.getValue()).iterator(),
 					StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
 			logger.info("Output File stored location: {}", outputFilePath + File.separator + "WordCount");

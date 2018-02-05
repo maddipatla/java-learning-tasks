@@ -4,11 +4,16 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.stream.Stream;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class WordCountThread implements Runnable {
-
+	static final Logger logger = LogManager.getLogger(WordCountThread.class.getName());
 	private Path file;
-	public static ConcurrentHashMap<String, Long> wordCount = new ConcurrentHashMap<>();
+	private static ConcurrentMap<String, Long> wordCount = new ConcurrentHashMap<>();
 
 	public WordCountThread(Path file) {
 		this.file = file;
@@ -16,8 +21,8 @@ public class WordCountThread implements Runnable {
 
 	@Override
 	public void run() {
-		try {
-			Files.lines(file).forEach(line -> {
+		try (Stream<String> stream = Files.lines(file)) {
+			stream.forEach(line -> {
 				String[] strings = line.split(" ");
 				for (String string : strings) {
 					if (!string.trim().isEmpty()) {
@@ -29,8 +34,16 @@ public class WordCountThread implements Runnable {
 				}
 			});
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.warn("Exception in WordCountThread.run(): {}", e.getMessage());
 		}
+	}
+
+	public static ConcurrentMap<String, Long> getWordCount() {
+		return wordCount;
+	}
+
+	public static void setWordCount(ConcurrentMap<String, Long> wordCount) {
+		WordCountThread.wordCount = wordCount;
 	}
 
 }

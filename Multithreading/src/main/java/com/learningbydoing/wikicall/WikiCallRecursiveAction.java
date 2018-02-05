@@ -18,7 +18,7 @@ public class WikiCallRecursiveAction extends RecursiveAction {
 	static final Logger logger = LogManager.getLogger(WikiCallRecursiveAction.class.getName());
 
 	public static final Integer THRESHOLD = 1;
-	List<String> strings;
+	private List<String> strings;
 	private String wikiURLString;
 	private Path outputFilePath;
 

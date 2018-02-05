@@ -30,7 +30,7 @@ public class ExtractStringsByDelimeter implements Callable<List<String>> {
 		List<String> strings = new ArrayList<>();
 		try (Stream<String> stream = Files
 				.lines(Paths.get(getClass().getClassLoader().getResource(filePath.toString()).toURI()))) {
-			strings.addAll(stream.map(string -> string.split(delimeter)).flatMap(x -> Arrays.stream(x))
+			strings.addAll(stream.map(string -> string.split(delimeter)).flatMap(Arrays::stream)
 					.filter(string -> !string.isEmpty() && !string.equalsIgnoreCase("")).collect(Collectors.toList()));
 		} catch (IOException | URISyntaxException e) {
 			logger.error("Exception in ExtractStringsByDelimeter.call(): {}", e.getMessage());
