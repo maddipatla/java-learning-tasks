@@ -66,9 +66,4 @@ public class SplitFileByNLines {
 		logger.info("Time taken is: {} milliseconds.", System.currentTimeMillis() - startTime);
 	}
 
-	public static void main(String[] args) {
-		new SplitFileByNLines(
-				"/home/chandrab/Pramati/Workspace/Java/Learning-Java-By-Doing/Java-Learning-Tasks/Multithreading/src/main/resources/Multithreading_Task1_Books.csv",
-				1000L, "/home/chandrab/tmp/task1").split();
-	}
 }

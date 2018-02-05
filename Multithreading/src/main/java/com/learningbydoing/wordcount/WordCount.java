@@ -15,7 +15,7 @@ import org.apache.logging.log4j.Logger;
 
 public class WordCount {
 	static final Logger logger = LogManager.getLogger(WordCount.class.getName());
-	private static final String DEFAULT_PATH = "/home/chandrab/Pramati/Workspace/Java/Learning-Java-By-Doing/Java-Learning-Tasks/Multithreading/task2";
+	private static final String DEFAULT_PATH = System.getProperty("user.dir") + File.separator + "task2";
 
 	private Path filesPath;
 	private Path outputFilePath;
@@ -61,5 +61,4 @@ public class WordCount {
 		}
 		logger.info("Time taken: {}", System.currentTimeMillis() - startTime);
 	}
-
 }
