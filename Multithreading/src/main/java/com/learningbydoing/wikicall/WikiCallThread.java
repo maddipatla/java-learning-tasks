@@ -67,7 +67,7 @@ public class WikiCallThread implements Runnable {
 				logger.warn("don't find description for the given word: {}", wikiString);
 			connection.disconnect();
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.warn("Exception in WikiCallThread.run(): {}", e.getMessage());
 		}
 	}
 

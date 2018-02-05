@@ -9,9 +9,12 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Stream;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import com.learningbydoing.wikicall.NoPathExistException;
 
 public class WordCount {
 	static final Logger logger = LogManager.getLogger(WordCount.class.getName());
@@ -29,28 +32,31 @@ public class WordCount {
 		if (filesPath != null && outputFilePath != null) {
 			this.filesPath = Paths.get(filesPath);
 			this.outputFilePath = Paths.get(outputFilePath);
-			if ((!Files.exists(this.filesPath) && !Files.isDirectory(this.filesPath))
-					|| (!Files.exists(this.outputFilePath) && !Files.isDirectory(this.outputFilePath)))
-				throw new RuntimeException("Directory doesn't exist");
+			if ((!this.filesPath.toFile().exists() && !this.filesPath.toFile().isDirectory())
+					|| (!this.outputFilePath.toFile().exists() && !this.outputFilePath.toFile().isDirectory()))
+				throw new NoPathExistException("Directory doesn't exist");
 
 		} else
-			throw new RuntimeException("Directory can't be null");
+			throw new NoPathExistException("Directory can't be null");
 	}
 
 	public void processWordCount() {
 		Long startTime = System.currentTimeMillis();
 		ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 20);
-		try {
-			Files.walk(filesPath).filter(Files::isRegularFile).forEach(file -> {
+
+		try (Stream<Path> paths = Files.walk(filesPath)) {
+			paths.filter(Files::isRegularFile).forEach(file -> {
 				executorService.execute(new WordCountThread(file));
 			});
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.warn("Exception in WordCount.processWordCount(): {}", e.getMessage());
 		}
+
 		executorService.shutdown();
 		while (!executorService.isTerminated()) {
 			logger.info("Waiting for all threads to be finished with their work and executorService is shutdown");
 		}
+
 		try {
 			Files.write(Paths.get(outputFilePath + File.separator + "WordCount"),
 					() -> WordCountThread.wordCount.entrySet().stream()
@@ -58,7 +64,7 @@ public class WordCount {
 					StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
 			logger.info("Output File stored location: {}", outputFilePath + File.separator + "WordCount");
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.warn("Exception in WordCount.processWordCount(): {}", e.getMessage());
 		}
 		logger.info("Time taken: {}", System.currentTimeMillis() - startTime);
 	}
