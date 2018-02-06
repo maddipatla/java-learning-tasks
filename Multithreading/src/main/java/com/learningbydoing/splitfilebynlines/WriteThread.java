@@ -32,7 +32,8 @@ public class WriteThread implements Runnable {
 			do {
 				List<String> strings = new ArrayList<>();
 				while (numberOfLines >= counter) {
-					if (ReadThread.queue.isEmpty() && ReadThread.isAllLinesQueued())
+					if (ReadThread.isAllLinesQueued() && (ReadThread.getNoOfRowsInFile() / numberOfLines) <= fileCounter
+							&& ReadThread.queue.isEmpty())
 						break;
 					strings.add(ReadThread.queue.take());
 					counter++;

@@ -31,7 +31,7 @@ public class WikiCall {
 	public static final String WIKI_DEFAULT_URL_STRING = "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=";
 	private static final String DEFAULT_DELIMETER = "\\s{2}";
 
-	static ForkJoinPool pool = new ForkJoinPool(Runtime.getRuntime().availableProcessors() * 20);
+	static ForkJoinPool pool = new ForkJoinPool(Runtime.getRuntime().availableProcessors() * 30);
 
 	private Path filePath;
 	private String delimeter = null;
@@ -121,7 +121,7 @@ public class WikiCall {
 	}
 
 	public void makeWikiCallAndWriteToFiles(List<String> strings) {
-		ExecutorService service = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 20);
+		ExecutorService service = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 30);
 		for (String string : strings) {
 			service.execute(new WikiCallThread(string, wikiURLString, outputFilePath));
 		}
@@ -129,5 +129,9 @@ public class WikiCall {
 		while (!service.isTerminated()) {
 			logger.info("Waiting for all threads to be finished with their work and executorService is shutdown");
 		}
+	}
+
+	public static void main(String[] args) {
+		new WikiCall(true).fetchStringsMakeWikiCallAndWrite();
 	}
 }

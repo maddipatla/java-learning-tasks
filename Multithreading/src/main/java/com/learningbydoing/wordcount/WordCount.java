@@ -42,7 +42,7 @@ public class WordCount {
 
 	public void processWordCount() {
 		Long startTime = System.currentTimeMillis();
-		ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 20);
+		ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 30);
 
 		try (Stream<Path> paths = Files.walk(filesPath)) {
 			paths.filter(Files::isRegularFile).forEach(file -> executorService.execute(new WordCountThread(file)));
@@ -65,5 +65,9 @@ public class WordCount {
 			logger.warn("Exception in WordCount.processWordCount(): {}", e.getMessage());
 		}
 		logger.info("Time taken: {}", System.currentTimeMillis() - startTime);
+	}
+
+	public static void main(String[] args) {
+		new WordCount().processWordCount();
 	}
 }
