@@ -1,11 +1,13 @@
 package com.learningbydoing.refactor;
 
-public class Children extends Book {
+import java.io.Serializable;
+
+public class Children extends AbstractBook implements Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 5720809525046839792L;
+	private static final long serialVersionUID = 1584671888930324683L;
 
 	public Children(Long id, String title, Double price) {
 		super(id, title, price);
@@ -13,7 +15,7 @@ public class Children extends Book {
 
 	@Override
 	public String getTitle() {
-		return new StringBuilder().append(title).append(" - Children").toString();
+		return new StringBuilder().append(title).append(" - For Children").toString();
 	}
 
 }

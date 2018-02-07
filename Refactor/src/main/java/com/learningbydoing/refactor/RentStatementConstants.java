@@ -1,5 +1,5 @@
 package com.learningbydoing.refactor;
 
-public enum StatementConstants {
+public enum RentStatementConstants {
 	EMAIL, PDF
 }

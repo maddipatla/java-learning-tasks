@@ -3,11 +3,13 @@ package com.learningbydoing.refactor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class BookFactory {
+import com.learningbydoing.exception.TypeRequiredException;
+
+public final class BookFactory {
 	static final Logger logger = LogManager.getLogger(BookFactory.class.getName());
 
 	private BookFactory() {
-		throw new IllegalStateException("Utility class");
+		throw new IllegalStateException("Factory class, can't be instantiated");
 	}
 
 	public static Book getBook(BookConstants bookType, Long bookId, String bookTitle, Double bookPrice) {
@@ -21,6 +23,6 @@ public class BookFactory {
 		default:
 			break;
 		}
-		return null;
+		throw new TypeRequiredException("BookType is required");
 	}
 }

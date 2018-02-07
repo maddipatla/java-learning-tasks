@@ -1,8 +1,13 @@
 package com.learningbydoing.refactor;
 
-public class NonFiction extends Book {
+import java.io.Serializable;
 
-	private static final long serialVersionUID = 1L;
+public class NonFiction extends AbstractBook implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 621436336497884562L;
 
 	public NonFiction(Long id, String title, Double price) {
 		super(id, title, price);

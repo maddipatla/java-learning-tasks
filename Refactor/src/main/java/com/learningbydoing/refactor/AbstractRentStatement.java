@@ -2,14 +2,15 @@ package com.learningbydoing.refactor;
 
 import java.util.Iterator;
 
-public class PDFStatement implements Statement {
-
+public class AbstractRentStatement implements Statement {
 	private Customer customer;
+	protected double totalPrice;
 
-	public PDFStatement(Customer customer) {
+	public AbstractRentStatement(Customer customer) {
 		this.customer = customer;
 	}
 
+	@Override
 	public String fetchStatement() {
 		Iterator<Rental> iterator = customer.getRentals().iterator();
 		double price = 0.0;
@@ -17,7 +18,8 @@ public class PDFStatement implements Statement {
 			Rental rental = iterator.next();
 			price += rental.getBook().getPrice(rental.getDaysRented(), rental.getDaysToDiscount());
 		}
-		return new StringBuilder().append("PDF Statement: ").append(price).toString();
+		totalPrice = price;
+		return "";
 	}
 
 }
