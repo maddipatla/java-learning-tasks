@@ -30,6 +30,10 @@ public class ReadThread implements Runnable {
 		this.filePath = filePath;
 	}
 
+	/**
+	 * Read file line by line using Stream and put it in the queue which will be
+	 * taken by the WriteThread in WriteThrad.java
+	 */
 	@Override
 	public void run() {
 		try (Stream<String> stream = Files.lines(filePath)) {
@@ -49,6 +53,9 @@ public class ReadThread implements Runnable {
 	}
 
 	/**
+	 * This flag is used to exit from the loop in WriteThread.java, which is keep on
+	 * waiting for the items in the queue.
+	 * 
 	 * @param isAllLinesQueued
 	 */
 	public static void setAllLinesQueued(boolean isAllLinesQueued) {
@@ -56,6 +63,9 @@ public class ReadThread implements Runnable {
 	}
 
 	/**
+	 * Number of rows in input file is required to determine when to exit from the
+	 * loop in WriteThread.java
+	 * 
 	 * @param noOfRowsInFile
 	 */
 	public static void setNoOfRowsInFile(Long noOfRowsInFile) {

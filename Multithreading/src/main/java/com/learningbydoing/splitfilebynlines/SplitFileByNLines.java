@@ -15,6 +15,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.learningbydoing.exception.NoFileExtensionException;
 import com.learningbydoing.exception.NoPathExistException;
+import com.learningbydoing.exception.NoWritePermissionsException;
 
 /**
  * @author Maddipatla Chandra Babu
@@ -30,6 +31,14 @@ public class SplitFileByNLines {
 	private Long splitNumber;
 	private Path outputFilePath;
 
+	/**
+	 * FilePath is classpath file, which is Multithreading_Task1_Books.csv.
+	 * <p>
+	 * SplitNumber is 1000
+	 * <p>
+	 * outputFilePath is user directory, under which task1 directory will be created
+	 * in which all the files will be written.
+	 */
 	public SplitFileByNLines() {
 		try {
 			this.filePath = Paths.get(getClass().getClassLoader().getResource(DEFAULT_FILE).toURI());
@@ -38,6 +47,9 @@ public class SplitFileByNLines {
 			builder.append("task1");
 			builder.append(File.separator);
 			this.outputFilePath = Paths.get(builder.toString());
+			if (!Files.isWritable(this.outputFilePath))
+				throw new NoWritePermissionsException(
+						"Don't have write permissions to the default location. You many need to use overloaded constructor to specify custom path to writes");
 			Files.createDirectory(this.outputFilePath);
 			this.splitNumber = 1000L;
 		} catch (URISyntaxException | IOException e) {
@@ -75,9 +87,5 @@ public class SplitFileByNLines {
 			logger.info("Waiting for all threads to be finished with their work and executorService is shutdown");
 		}
 		logger.info("Time taken is: {} milliseconds.", System.currentTimeMillis() - startTime);
-	}
-
-	public static void main(String[] args) {
-		new SplitFileByNLines().split();
 	}
 }
