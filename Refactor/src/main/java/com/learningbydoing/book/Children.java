@@ -2,6 +2,11 @@ package com.learningbydoing.book;
 
 import java.io.Serializable;
 
+/**
+ * @author Maddipatla Chandra Babu
+ * 
+ * @date 07-Feb-2018
+ */
 public class Children extends AbstractBook implements Serializable {
 
 	/**
@@ -9,6 +14,11 @@ public class Children extends AbstractBook implements Serializable {
 	 */
 	private static final long serialVersionUID = 1584671888930324683L;
 
+	/**
+	 * @param id
+	 * @param title
+	 * @param price
+	 */
 	public Children(Long id, String title, Double price) {
 		super(id, title, price);
 	}

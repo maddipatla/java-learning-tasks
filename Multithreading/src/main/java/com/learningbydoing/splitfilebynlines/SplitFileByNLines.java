@@ -16,6 +16,11 @@ import org.apache.logging.log4j.Logger;
 import com.learningbydoing.exception.NoFileExtensionException;
 import com.learningbydoing.exception.NoPathExistException;
 
+/**
+ * @author Maddipatla Chandra Babu
+ * 
+ * @date 07-Feb-2018
+ */
 public class SplitFileByNLines {
 	static final Logger logger = LogManager.getLogger(SplitFileByNLines.class.getName());
 
@@ -40,6 +45,11 @@ public class SplitFileByNLines {
 		}
 	}
 
+	/**
+	 * @param filePath
+	 * @param splitNumber
+	 * @param outputFilePath
+	 */
 	public SplitFileByNLines(String filePath, Long splitNumber, String outputFilePath) {
 		this.splitNumber = splitNumber;
 		if (filePath != null && outputFilePath != null) {

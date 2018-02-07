@@ -7,6 +7,11 @@ import org.apache.logging.log4j.Logger;
 
 import com.learningbydoing.exception.DiscountDaysMoreThanRentDaysException;
 
+/**
+ * @author Maddipatla Chandra Babu
+ * 
+ * @date 07-Feb-2018
+ */
 public abstract class AbstractBook implements Book, Serializable {
 
 	/**

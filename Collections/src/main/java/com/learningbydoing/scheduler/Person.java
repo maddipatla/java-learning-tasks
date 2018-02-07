@@ -5,8 +5,21 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Maddipatla Chandra Babu
+ * 
+ * @date 07-Feb-2018
+ */
 public class Person {
 
+	/**
+	 * @param name
+	 * @param emailId
+	 * @param phoneNo
+	 * @param inTime
+	 * @param availableForInterview
+	 * @param isScheduled
+	 */
 	public Person(String name, String emailId, Long phoneNo, LocalTime inTime, boolean availableForInterview,
 			boolean isScheduled) {
 		super();
@@ -50,6 +63,9 @@ public class Person {
 		return phoneNo;
 	}
 
+	/**
+	 * @param phoneNo
+	 */
 	public void setPhoneNo(Long phoneNo) {
 		this.phoneNo = phoneNo;
 	}
@@ -58,6 +74,9 @@ public class Person {
 		return inTime;
 	}
 
+	/**
+	 * @param inTime
+	 */
 	public void setInTime(LocalTime inTime) {
 		this.inTime = inTime;
 	}
@@ -66,6 +85,9 @@ public class Person {
 		return availableForInterview;
 	}
 
+	/**
+	 * @param availableForInterview
+	 */
 	public void setAvailableForInterview(boolean availableForInterview) {
 		this.availableForInterview = availableForInterview;
 	}
@@ -74,6 +96,9 @@ public class Person {
 		return isScheduled;
 	}
 
+	/**
+	 * @param isScheduled
+	 */
 	public void setScheduled(boolean isScheduled) {
 		this.isScheduled = isScheduled;
 	}
@@ -84,6 +109,9 @@ public class Person {
 				+ ", availableForInterview=" + availableForInterview + ", isScheduled=" + isScheduled + "]";
 	}
 
+	/**
+	 * @return list of persons
+	 */
 	public static List<Person> getScheduledPersons() {
 		List<Person> persons = new ArrayList<>();
 		LocalTime time = LocalTime.parse("08:00");
@@ -95,6 +123,9 @@ public class Person {
 		return persons;
 	}
 
+	/**
+	 * @return list of persons
+	 */
 	public static List<Person> getUnscheduledPersons() {
 		List<Person> persons = new ArrayList<>();
 		LocalTime time = LocalTime.parse("10:00");

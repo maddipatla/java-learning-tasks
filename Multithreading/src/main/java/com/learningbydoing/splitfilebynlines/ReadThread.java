@@ -10,6 +10,11 @@ import java.util.stream.Stream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * @author Maddipatla Chandra Babu
+ * 
+ * @date 07-Feb-2018
+ */
 public class ReadThread implements Runnable {
 	static final Logger logger = LogManager.getLogger(ReadThread.class.getName());
 
@@ -18,6 +23,9 @@ public class ReadThread implements Runnable {
 	private static boolean isAllLinesQueued = false;
 	private static Long noOfRowsInFile = 0L;
 
+	/**
+	 * @param filePath
+	 */
 	public ReadThread(Path filePath) {
 		this.filePath = filePath;
 	}
@@ -40,10 +48,16 @@ public class ReadThread implements Runnable {
 		return isAllLinesQueued;
 	}
 
+	/**
+	 * @param isAllLinesQueued
+	 */
 	public static void setAllLinesQueued(boolean isAllLinesQueued) {
 		ReadThread.isAllLinesQueued = isAllLinesQueued;
 	}
 
+	/**
+	 * @param noOfRowsInFile
+	 */
 	public static void setNoOfRowsInFile(Long noOfRowsInFile) {
 		ReadThread.noOfRowsInFile = noOfRowsInFile;
 	}

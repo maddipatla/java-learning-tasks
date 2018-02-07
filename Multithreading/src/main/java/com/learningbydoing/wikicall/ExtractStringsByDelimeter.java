@@ -15,11 +15,20 @@ import java.util.stream.Stream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * @author Maddipatla Chandra Babu
+ * 
+ * @date 07-Feb-2018
+ */
 public class ExtractStringsByDelimeter implements Callable<List<String>> {
 	static final Logger logger = LogManager.getLogger(ExtractStringsByDelimeter.class.getName());
 	private Path filePath;
 	private String delimeter;
 
+	/**
+	 * @param filePath
+	 * @param delimeter
+	 */
 	public ExtractStringsByDelimeter(String filePath, String delimeter) {
 		this.filePath = Paths.get(filePath);
 		this.delimeter = delimeter;

@@ -1,10 +1,20 @@
 package com.learningbydoing.lru.practice;
 
+/**
+ * @author Maddipatla Chandra Babu
+ * 
+ * @date 07-Feb-2018
+ */
 public class Node {
 	private Node next;
 	private Node prev;
 	private Integer data;
 
+	/**
+	 * @param prev
+	 * @param next
+	 * @param data
+	 */
 	public Node(Node prev, Node next, Integer data) {
 		this.prev = prev;
 		this.next = next;

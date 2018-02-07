@@ -5,6 +5,11 @@ import org.apache.logging.log4j.Logger;
 
 import com.learningbydoing.exception.TypeRequiredException;
 
+/**
+ * @author Maddipatla Chandra Babu
+ * 
+ * @date 07-Feb-2018
+ */
 public final class BookFactory {
 	static final Logger logger = LogManager.getLogger(BookFactory.class.getName());
 
@@ -12,6 +17,13 @@ public final class BookFactory {
 		throw new IllegalStateException("Factory class, can't be instantiated");
 	}
 
+	/**
+	 * @param bookType
+	 * @param bookId
+	 * @param bookTitle
+	 * @param bookPrice
+	 * @return
+	 */
 	public static Book getBook(BookConstants bookType, Long bookId, String bookTitle, Double bookPrice) {
 		switch (bookType) {
 		case FICTION:

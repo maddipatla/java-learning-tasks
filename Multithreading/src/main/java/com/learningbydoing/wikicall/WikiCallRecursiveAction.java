@@ -9,6 +9,11 @@ import java.util.concurrent.RecursiveAction;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * @author Maddipatla Chandra Babu
+ * 
+ * @date 07-Feb-2018
+ */
 public class WikiCallRecursiveAction extends RecursiveAction {
 	/**
 	 * 
@@ -22,6 +27,11 @@ public class WikiCallRecursiveAction extends RecursiveAction {
 	private String wikiURLString;
 	private Path outputFilePath;
 
+	/**
+	 * @param strings
+	 * @param wikiURLString
+	 * @param outputFilePath
+	 */
 	public WikiCallRecursiveAction(List<String> strings, String wikiURLString, Path outputFilePath) {
 		this.strings = strings;
 		this.wikiURLString = wikiURLString;
@@ -35,6 +45,9 @@ public class WikiCallRecursiveAction extends RecursiveAction {
 		new WikiCallThread(strings.get(0), wikiURLString, outputFilePath).run();
 	}
 
+	/**
+	 * @return
+	 */
 	private List<WikiCallRecursiveAction> createSubtasks() {
 		List<WikiCallRecursiveAction> subtasks = new ArrayList<>();
 

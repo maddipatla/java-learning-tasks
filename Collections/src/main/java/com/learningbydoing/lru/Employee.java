@@ -1,10 +1,20 @@
 package com.learningbydoing.lru;
 
+/**
+ * @author Maddipatla Chandra Babu
+ * 
+ * @date 07-Feb-2018
+ */
 public class Employee {
 	private int id;
 	private String name;
 	private double salary;
 
+	/**
+	 * @param id
+	 * @param name
+	 * @param salary
+	 */
 	public Employee(Integer id, String name, Double salary) {
 		this.id = id;
 		this.name = name;
@@ -15,6 +25,9 @@ public class Employee {
 		return id;
 	}
 
+	/**
+	 * @param id
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -23,6 +36,9 @@ public class Employee {
 		return name;
 	}
 
+	/**
+	 * @param name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -31,6 +47,9 @@ public class Employee {
 		return salary;
 	}
 
+	/**
+	 * @param salary
+	 */
 	public void setSalary(double salary) {
 		this.salary = salary;
 	}

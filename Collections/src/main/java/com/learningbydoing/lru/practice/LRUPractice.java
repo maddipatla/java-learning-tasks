@@ -1,5 +1,10 @@
 package com.learningbydoing.lru.practice;
 
+/**
+ * @author Maddipatla Chandra Babu
+ * 
+ * @date 07-Feb-2018
+ */
 public class LRUPractice {
 	private Integer noOfPages;
 	private Node rear;
@@ -7,10 +12,17 @@ public class LRUPractice {
 	private Integer noOfHits = 0;
 	private Integer listSize = 0;
 
+	/**
+	 * @param noOfPages
+	 */
 	public LRUPractice(Integer noOfPages) {
 		this.noOfPages = noOfPages;
 	}
 
+	/**
+	 * @param data
+	 * @return Node
+	 */
 	public Node nodeExists(Integer data) {
 		Node node = front;
 		while (node != null) {
@@ -23,6 +35,9 @@ public class LRUPractice {
 		return null;
 	}
 
+	/**
+	 * @param data
+	 */
 	public void add(Integer data) {
 		if (rear != null && listSize < noOfPages) {
 			Node existingNode = nodeExists(data);
@@ -46,6 +61,9 @@ public class LRUPractice {
 		listSize++;
 	}
 
+	/**
+	 * @param existingNode
+	 */
 	public void processExistingNode(Node existingNode) {
 		if (existingNode != null && existingNode != rear) {
 			if (existingNode == front) {
@@ -64,6 +82,9 @@ public class LRUPractice {
 		}
 	}
 
+	/**
+	 * @param data
+	 */
 	public void processNonExistNode(Integer data) {
 		Node node = new Node(rear, null, data);
 		rear.setNext(node);

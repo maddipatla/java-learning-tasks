@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 import com.learningbydoing.book.Book;
 
+/**
+ * @author Maddipatla Chandra Babu
+ * 
+ * @date 07-Feb-2018
+ */
 public class Rental implements Serializable {
 
 	private static final long serialVersionUID = -2191332894231658614L;
@@ -14,6 +19,11 @@ public class Rental implements Serializable {
 
 	private Book book;
 
+	/**
+	 * @param daysRented
+	 * @param daysToDiscount
+	 * @param book
+	 */
 	public Rental(Integer daysRented, Integer daysToDiscount, Book book) {
 		super();
 		this.daysRented = daysRented;

@@ -13,6 +13,11 @@ import java.util.stream.Stream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * @author Maddipatla Chandra Babu
+ * 
+ * @date 07-Feb-2018
+ */
 public class ExtractStringsByNewLine implements Callable<List<String>> {
 	static final Logger logger = LogManager.getLogger(ExtractStringsByNewLine.class.getName());
 

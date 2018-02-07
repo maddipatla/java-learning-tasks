@@ -6,6 +6,11 @@ import java.util.List;
 
 import com.learningbydoing.rental.Rental;
 
+/**
+ * @author Maddipatla Chandra Babu
+ * 
+ * @date 07-Feb-2018
+ */
 public class Customer implements Serializable {
 
 	private static final long serialVersionUID = 6360800785653146523L;
@@ -16,6 +21,11 @@ public class Customer implements Serializable {
 
 	private List<Rental> rentals = new ArrayList<>();
 
+	/**
+	 * @param id
+	 * @param name
+	 * @param rentals
+	 */
 	public Customer(Integer id, String name, List<Rental> rentals) {
 		super();
 		this.id = id;
@@ -31,6 +41,9 @@ public class Customer implements Serializable {
 		return name;
 	}
 
+	/**
+	 * @param rental
+	 */
 	public void addRental(Rental rental) {
 		this.rentals.add(rental);
 	}

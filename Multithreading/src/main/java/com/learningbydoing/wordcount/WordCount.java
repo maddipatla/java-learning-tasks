@@ -16,6 +16,11 @@ import org.apache.logging.log4j.Logger;
 
 import com.learningbydoing.exception.NoPathExistException;
 
+/**
+ * @author Maddipatla Chandra Babu
+ * 
+ * @date 07-Feb-2018
+ */
 public class WordCount {
 	static final Logger logger = LogManager.getLogger(WordCount.class.getName());
 	private static final String DEFAULT_PATH = System.getProperty("user.dir") + File.separator + "task2";
@@ -28,6 +33,10 @@ public class WordCount {
 		this.outputFilePath = Paths.get(DEFAULT_PATH);
 	}
 
+	/**
+	 * @param filesPath
+	 * @param outputFilePath
+	 */
 	public WordCount(String filesPath, String outputFilePath) {
 		if (filesPath != null && outputFilePath != null) {
 			this.filesPath = Paths.get(filesPath);

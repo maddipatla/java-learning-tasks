@@ -24,6 +24,11 @@ import org.apache.logging.log4j.Logger;
 import com.jsoniter.JsonIterator;
 import com.jsoniter.any.Any;
 
+/**
+ * @author Maddipatla Chandra Babu
+ * 
+ * @date 07-Feb-2018
+ */
 public class WikiCallThread implements Runnable {
 
 	static final Logger logger = LogManager.getLogger(WikiCallThread.class.getName());
@@ -31,6 +36,11 @@ public class WikiCallThread implements Runnable {
 	private Path outputFilePath;
 	private String wikiURLString;
 
+	/**
+	 * @param wikiString
+	 * @param wikiURLString
+	 * @param outputFilePath
+	 */
 	public WikiCallThread(String wikiString, String wikiURLString, Path outputFilePath) {
 		this.wikiString = wikiString;
 		this.wikiURLString = wikiURLString;
@@ -44,6 +54,10 @@ public class WikiCallThread implements Runnable {
 		connection.disconnect();
 	}
 
+	/**
+	 * @param connection
+	 * @return
+	 */
 	public String getJsonStringBySendingRequest(HttpsURLConnection connection) {
 		StringBuilder builder = new StringBuilder();
 		try {
@@ -76,6 +90,9 @@ public class WikiCallThread implements Runnable {
 		return connection;
 	}
 
+	/**
+	 * @param list
+	 */
 	private void writeToFile(List<String> list) {
 		if (!list.isEmpty()) {
 			String title = list.remove(0);
@@ -88,6 +105,10 @@ public class WikiCallThread implements Runnable {
 		}
 	}
 
+	/**
+	 * @param jsonString
+	 * @return
+	 */
 	private List<String> getTitleDescriptionFromJsonString(String jsonString) {
 		Any obj = JsonIterator.deserialize(jsonString);
 		Map<String, Any> map = obj.asMap().get("query").asMap().get("pages").asMap();

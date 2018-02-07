@@ -1,5 +1,10 @@
 package com.learningbydoing.lru;
 
+/**
+ * @author Maddipatla Chandra Babu
+ * 
+ * @date 07-Feb-2018
+ */
 public class LRUCache {
 	private Integer noOfPages;
 	private Node front;
@@ -7,10 +12,17 @@ public class LRUCache {
 	private Integer noOfHits = 0;
 	private Integer listSize = 0;
 
+	/**
+	 * @param noOfPages
+	 */
 	public LRUCache(Integer noOfPages) {
 		this.noOfPages = noOfPages;
 	}
 
+	/**
+	 * @param key
+	 * @return Employee
+	 */
 	public Employee getEmployee(Integer key) {
 		Employee employee;
 		if (front != null && listSize < noOfPages) {
@@ -43,6 +55,10 @@ public class LRUCache {
 		return employee;
 	}
 
+	/**
+	 * @param key
+	 * @return Node
+	 */
 	private Node getNodeExists(Integer key) {
 		Node node = front;
 		while (node != null) {
@@ -53,6 +69,9 @@ public class LRUCache {
 		return null;
 	}
 
+	/**
+	 * @param existingNode
+	 */
 	private void processExistingNode(Node existingNode) {
 		if (existingNode == rear && existingNode != front) {
 			rear = rear.getPrev();
@@ -71,6 +90,10 @@ public class LRUCache {
 		}
 	}
 
+	/**
+	 * @param key
+	 * @return Employee
+	 */
 	private Employee processNonExistNode(Integer key) {
 		Employee employee = getEmployeeFromDB(key);
 		Node node = new Node(null, front, employee);
@@ -81,6 +104,10 @@ public class LRUCache {
 		return employee;
 	}
 
+	/**
+	 * @param key
+	 * @return Employee
+	 */
 	private Employee getEmployeeFromDB(Integer key) {
 		return new Employee(key, "Employee-" + key, Double.valueOf(key * 5d));
 	}

@@ -2,6 +2,11 @@ package com.learningbydoing.scheduler;
 
 import java.util.Comparator;
 
+/**
+ * @author Maddipatla Chandra Babu
+ * 
+ * @date 07-Feb-2018
+ */
 public class ScheduleComparator implements Comparator<Person> {
 
 	@Override

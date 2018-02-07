@@ -10,6 +10,11 @@ import java.util.stream.Stream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * @author Maddipatla Chandra Babu
+ * 
+ * @date 07-Feb-2018
+ */
 public class WordCountThread implements Runnable {
 	static final Logger logger = LogManager.getLogger(WordCountThread.class.getName());
 	private Path file;
@@ -42,6 +47,9 @@ public class WordCountThread implements Runnable {
 		return wordCount;
 	}
 
+	/**
+	 * @param wordCount
+	 */
 	public static void setWordCount(ConcurrentMap<String, Long> wordCount) {
 		WordCountThread.wordCount = wordCount;
 	}

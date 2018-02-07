@@ -13,12 +13,22 @@ import java.util.stream.Stream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * @author Maddipatla Chandra Babu
+ * 
+ * @date 07-Feb-2018
+ */
 public class ExtractStringsByDelimeterAndPosition implements Callable<List<String>> {
 	static final Logger logger = LogManager.getLogger(ExtractStringsByDelimeterAndPosition.class.getName());
 	private String filePath;
 	private String delimeter;
 	private Integer positionOfString;
 
+	/**
+	 * @param filePath
+	 * @param delimeter
+	 * @param positionOfString
+	 */
 	public ExtractStringsByDelimeterAndPosition(String filePath, String delimeter, Integer positionOfString) {
 		this.filePath = filePath;
 		this.delimeter = delimeter;

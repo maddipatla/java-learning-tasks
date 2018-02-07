@@ -40,6 +40,9 @@ public class WikiCall {
 	private String wikiURLString;
 	private boolean useForkJoin;
 
+	/**
+	 * @param useForkJoin
+	 */
 	public WikiCall(boolean useForkJoin) {
 		try {
 			this.useForkJoin = useForkJoin;
@@ -57,6 +60,12 @@ public class WikiCall {
 		}
 	}
 
+	/**
+	 * @param filePath
+	 * @param outputFilePath
+	 * @param useForkJoin
+	 * @param wikiURLString
+	 */
 	public WikiCall(String filePath, String outputFilePath, boolean useForkJoin, String wikiURLString) {
 		this.useForkJoin = useForkJoin;
 		this.wikiURLString = wikiURLString;
@@ -73,6 +82,13 @@ public class WikiCall {
 			throw new NoPathExistException("File path or output file directory can't be null");
 	}
 
+	/**
+	 * @param filePath
+	 * @param delimeter
+	 * @param outputFilePath
+	 * @param useForkJoin
+	 * @param wikiURLString
+	 */
 	public WikiCall(String filePath, String delimeter, String outputFilePath, boolean useForkJoin,
 			String wikiURLString) {
 		this(filePath, outputFilePath, useForkJoin, wikiURLString);
@@ -82,6 +98,14 @@ public class WikiCall {
 			this.delimeter = delimeter;
 	}
 
+	/**
+	 * @param filePath
+	 * @param delimeter
+	 * @param position
+	 * @param outputFilePath
+	 * @param useForkJoin
+	 * @param wikiURLString
+	 */
 	public WikiCall(String filePath, String delimeter, Integer position, String outputFilePath, boolean useForkJoin,
 			String wikiURLString) {
 		this(filePath, delimeter, outputFilePath, useForkJoin, wikiURLString);
@@ -120,6 +144,9 @@ public class WikiCall {
 		return strings;
 	}
 
+	/**
+	 * @param strings
+	 */
 	public void makeWikiCallAndWriteToFiles(List<String> strings) {
 		ExecutorService service = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 30);
 		for (String string : strings) {

@@ -21,6 +21,10 @@ public class WriteThread implements Runnable {
 	private Long fileCounter = 1L;
 	private Path outputFilePath;
 
+	/**
+	 * @param numberOfLines
+	 * @param outputFilePath
+	 */
 	public WriteThread(Long numberOfLines, Path outputFilePath) {
 		this.numberOfLines = numberOfLines;
 		this.outputFilePath = outputFilePath;
