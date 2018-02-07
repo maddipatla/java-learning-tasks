@@ -22,6 +22,8 @@ public class Rental implements Serializable {
 	/**
 	 * @param daysRented
 	 * @param daysToDiscount
+	 *            - Which is at rental level(per book), because each book has
+	 *            different priority for the renter to give discount.
 	 * @param book
 	 */
 	public Rental(Integer daysRented, Integer daysToDiscount, Book book) {

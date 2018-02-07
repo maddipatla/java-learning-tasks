@@ -14,6 +14,7 @@ public final class BookFactory {
 	static final Logger logger = LogManager.getLogger(BookFactory.class.getName());
 
 	private BookFactory() {
+		logger.warn("Tried to instantiate object for BookFactory, which is illegal");
 		throw new IllegalStateException("Factory class, can't be instantiated");
 	}
 
@@ -22,9 +23,12 @@ public final class BookFactory {
 	 * @param bookId
 	 * @param bookTitle
 	 * @param bookPrice
-	 * @return
+	 * @return Book
 	 */
 	public static Book getBook(BookConstants bookType, Long bookId, String bookTitle, Double bookPrice) {
+		logger.info(
+				"Got request for Book instance with the details are: BookType: {}, BookId: {}, BookTitle: {}, BookPrice: {}",
+				bookType, bookId, bookTitle, bookPrice);
 		switch (bookType) {
 		case FICTION:
 			return new Fiction(bookId, bookTitle, bookPrice);

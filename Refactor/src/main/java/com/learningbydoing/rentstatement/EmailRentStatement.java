@@ -16,6 +16,10 @@ public class EmailRentStatement extends AbstractRentStatement {
 		super(customer);
 	}
 
+	/**
+	 * As I am not really implementing email service to send email, simply returning
+	 * String by appending text as Email Statement.
+	 */
 	@Override
 	public String fetchStatement() {
 		super.fetchStatement();

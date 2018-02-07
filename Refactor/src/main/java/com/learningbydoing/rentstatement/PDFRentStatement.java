@@ -16,6 +16,10 @@ public class PDFRentStatement extends AbstractRentStatement {
 		super(customer);
 	}
 
+	/**
+	 * As I am not really implementing PDF service, simply returning String by
+	 * appending text as PDF Statement.
+	 */
 	@Override
 	public String fetchStatement() {
 		super.fetchStatement();

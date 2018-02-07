@@ -21,6 +21,11 @@ public abstract class AbstractBook implements Book, Serializable {
 
 	static final Logger logger = LogManager.getLogger(AbstractBook.class.getName());
 
+	/**
+	 * @param id
+	 * @param title
+	 * @param price
+	 */
 	public AbstractBook(Long id, String title, Double price) {
 		this.id = id;
 		this.title = title;
@@ -46,7 +51,8 @@ public abstract class AbstractBook implements Book, Serializable {
 	 * @param daysRented
 	 *            - Number of days rented.
 	 * @param daysToDiscount
-	 *            - Number of days to discount.
+	 *            - Number of days to discount. If number of days to discount are
+	 *            more than rented days then throwing an exception.
 	 */
 	public Double getPrice(Integer daysRented, Integer daysToDiscount) {
 		if (daysRented < daysToDiscount)

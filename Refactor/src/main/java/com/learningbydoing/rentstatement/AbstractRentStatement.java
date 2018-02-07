@@ -22,6 +22,13 @@ public class AbstractRentStatement implements Statement {
 		this.customer = customer;
 	}
 
+	/**
+	 * To calculate Price get rentals from the Customer, iterate over rentals, get
+	 * book from each rental and get price from the book, sum it up all the books
+	 * price.
+	 * 
+	 * @return Price of all the books rented for the Customer.
+	 */
 	@Override
 	public String fetchStatement() {
 		Iterator<Rental> iterator = customer.getRentals().iterator();

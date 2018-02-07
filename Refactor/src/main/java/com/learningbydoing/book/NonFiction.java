@@ -23,6 +23,12 @@ public class NonFiction extends AbstractBook implements Serializable {
 		super(id, title, price);
 	}
 
+	/**
+	 * 
+	 * @return In order to override the method simply appending type of book to the
+	 *         book title.
+	 * 
+	 */
 	@Override
 	public String getTitle() {
 		return new StringBuilder().append(title).append(" - NonFiction").toString();
