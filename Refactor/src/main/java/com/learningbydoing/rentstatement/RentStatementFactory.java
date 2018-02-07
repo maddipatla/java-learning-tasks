@@ -1,6 +1,8 @@
-package com.learningbydoing.refactor;
+package com.learningbydoing.rentstatement;
 
+import com.learningbydoing.book.Customer;
 import com.learningbydoing.exception.TypeRequiredException;
+import com.learningbydoing.statement.Statement;
 
 public class RentStatementFactory {
 

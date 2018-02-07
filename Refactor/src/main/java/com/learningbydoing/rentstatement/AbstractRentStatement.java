@@ -1,6 +1,10 @@
-package com.learningbydoing.refactor;
+package com.learningbydoing.rentstatement;
 
 import java.util.Iterator;
+
+import com.learningbydoing.book.Customer;
+import com.learningbydoing.rental.Rental;
+import com.learningbydoing.statement.Statement;
 
 public class AbstractRentStatement implements Statement {
 	private Customer customer;

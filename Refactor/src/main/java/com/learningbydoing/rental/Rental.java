@@ -1,6 +1,8 @@
-package com.learningbydoing.refactor;
+package com.learningbydoing.rental;
 
 import java.io.Serializable;
+
+import com.learningbydoing.book.Book;
 
 public class Rental implements Serializable {
 

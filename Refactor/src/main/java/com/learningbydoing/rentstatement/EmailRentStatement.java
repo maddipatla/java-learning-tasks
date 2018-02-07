@@ -1,4 +1,6 @@
-package com.learningbydoing.refactor;
+package com.learningbydoing.rentstatement;
+
+import com.learningbydoing.book.Customer;
 
 public class EmailRentStatement extends AbstractRentStatement {
 

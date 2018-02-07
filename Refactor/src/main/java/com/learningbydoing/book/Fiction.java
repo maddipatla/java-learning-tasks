@@ -1,4 +1,4 @@
-package com.learningbydoing.refactor;
+package com.learningbydoing.book;
 
 import java.io.Serializable;
 

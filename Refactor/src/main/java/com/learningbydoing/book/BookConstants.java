@@ -1,4 +1,4 @@
-package com.learningbydoing.refactor;
+package com.learningbydoing.book;
 
 public enum BookConstants {
 	FICTION, NONFICTION, CHILDREN

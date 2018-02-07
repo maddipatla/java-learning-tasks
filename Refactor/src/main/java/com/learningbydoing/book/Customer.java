@@ -1,8 +1,10 @@
-package com.learningbydoing.refactor;
+package com.learningbydoing.book;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.learningbydoing.rental.Rental;
 
 public class Customer implements Serializable {
 
