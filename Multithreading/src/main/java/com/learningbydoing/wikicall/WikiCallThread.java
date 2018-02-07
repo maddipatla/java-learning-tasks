@@ -14,6 +14,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -37,10 +38,15 @@ public class WikiCallThread implements Runnable {
 	}
 
 	public void run() {
+		HttpsURLConnection connection = getHttpsURLConnection();
+		List<String> list = getTitleDescriptionFromJsonString(getJsonStringBySendingRequest(connection));
+		writeToFile(Objects.requireNonNull(list));
+		connection.disconnect();
+	}
+
+	public String getJsonStringBySendingRequest(HttpsURLConnection connection) {
+		StringBuilder builder = new StringBuilder();
 		try {
-			String queryString = URLEncoder.encode(wikiString, "UTF-8");
-			URL url = new URL(wikiURLString + queryString);
-			HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
 			connection.setRequestMethod("GET");
 			connection.setRequestProperty("Accept", "application/json");
 			if (connection.getResponseCode() != 200) {
@@ -48,27 +54,54 @@ public class WikiCallThread implements Runnable {
 			}
 			BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			String output;
-			StringBuilder builder = new StringBuilder();
 			while ((output = br.readLine()) != null) {
 				builder.append(output);
 			}
-			Any obj = JsonIterator.deserialize(builder.toString());
-			Map<String, Any> map = obj.asMap().get("query").asMap().get("pages").asMap();
-			List<String> list = new ArrayList<>(map.keySet());
-			Map<String, Any> descriptionMap = map.get(list.get(0)).asMap();
-			Any description = descriptionMap.get("extract");
-			list.clear();
-			if (description != null) {
-				list.add(description.toString());
-				String title = descriptionMap.get("title").toString().replaceAll("[^a-zA-Z0-9\\s]", "").trim();
+		} catch (IOException e) {
+			logger.warn("Exception in WikiCallThread.getJsonStringBySendingRequest(HttpsURLConnection connection): {}",
+					e.getMessage());
+		}
+		return builder.toString();
+	}
+
+	public HttpsURLConnection getHttpsURLConnection() {
+		HttpsURLConnection connection = null;
+		try {
+			String queryString = URLEncoder.encode(wikiString, "UTF-8");
+			URL url = new URL(wikiURLString + queryString);
+			connection = (HttpsURLConnection) url.openConnection();
+		} catch (IOException e) {
+			logger.warn("Exception in WikiCallThread.getHttpsURLConnection(): {}", e.getMessage());
+		}
+		return connection;
+	}
+
+	private void writeToFile(List<String> list) {
+		if (!list.isEmpty()) {
+			String title = list.remove(0);
+			try {
 				Files.write(Paths.get(outputFilePath + File.separator + title), list, StandardCharsets.UTF_8,
 						StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-			} else
-				logger.warn("don't find description for the given word: {}", wikiString);
-			connection.disconnect();
-		} catch (IOException e) {
-			logger.warn("Exception in WikiCallThread.run(): {}", e.getMessage());
+			} catch (IOException e) {
+				logger.warn("Exception in WikiCallThread.writeToFile(): {}", e.getMessage());
+			}
 		}
+	}
+
+	private List<String> getTitleDescriptionFromJsonString(String jsonString) {
+		Any obj = JsonIterator.deserialize(jsonString);
+		Map<String, Any> map = obj.asMap().get("query").asMap().get("pages").asMap();
+		List<String> list = new ArrayList<>(map.keySet());
+		Map<String, Any> descriptionMap = map.get(list.get(0)).asMap();
+		Any description = descriptionMap.get("extract");
+		List<String> titleDescription = null;
+		if (description != null) {
+			titleDescription = new ArrayList<>(2);
+			titleDescription.add(descriptionMap.get("title").toString().replaceAll("[^a-zA-Z0-9\\s]", "").trim());
+			titleDescription.add(description.toString());
+		} else
+			logger.warn("don't find description for the given word: {}", wikiString);
+		return titleDescription;
 	}
 
 }
