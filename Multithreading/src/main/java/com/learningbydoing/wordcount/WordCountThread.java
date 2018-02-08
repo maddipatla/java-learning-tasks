@@ -28,13 +28,14 @@ public class WordCountThread implements Runnable {
 	public void run() {
 		try (Stream<String> stream = Files.lines(file)) {
 			stream.forEach(line -> {
-				String[] strings = line.split(" ");
+				String[] strings = line.split("\\s+");
 				for (String string : strings) {
-					if (!string.trim().isEmpty()) {
-						if (wordCount.containsKey(string))
-							wordCount.put(string, wordCount.get(string) + 1);
+					String stringWithOnlyAlphaNumeric = string.replaceAll("[^A-Za-z0-9]", "").trim();
+					if (!stringWithOnlyAlphaNumeric.trim().isEmpty()) {
+						if (wordCount.containsKey(stringWithOnlyAlphaNumeric))
+							wordCount.put(stringWithOnlyAlphaNumeric, wordCount.get(stringWithOnlyAlphaNumeric) + 1);
 						else
-							wordCount.put(string, 1L);
+							wordCount.put(stringWithOnlyAlphaNumeric, 1L);
 					}
 				}
 			});
