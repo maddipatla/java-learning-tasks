@@ -14,7 +14,6 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -50,7 +49,7 @@ public class WikiCallThread implements Runnable {
 	public void run() {
 		HttpsURLConnection connection = getHttpsURLConnection();
 		List<String> list = getTitleDescriptionFromJsonString(getJsonStringBySendingRequest(connection));
-		writeToFile(Objects.requireNonNull(list));
+		writeToFile(list);
 		connection.disconnect();
 	}
 
@@ -115,9 +114,8 @@ public class WikiCallThread implements Runnable {
 		List<String> list = new ArrayList<>(map.keySet());
 		Map<String, Any> descriptionMap = map.get(list.get(0)).asMap();
 		Any description = descriptionMap.get("extract");
-		List<String> titleDescription = null;
+		List<String> titleDescription = new ArrayList<>(2);
 		if (description != null) {
-			titleDescription = new ArrayList<>(2);
 			titleDescription.add(descriptionMap.get("title").toString().replaceAll("[^a-zA-Z0-9\\s]", "").trim());
 			titleDescription.add(description.toString());
 		} else
