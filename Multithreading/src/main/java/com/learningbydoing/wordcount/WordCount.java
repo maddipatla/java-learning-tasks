@@ -49,6 +49,16 @@ public class WordCount {
 			throw new NoPathExistException("Directory can't be null");
 	}
 
+	/**
+	 * Thread pool created with available cores multiplied by 30 (Reason 30 is, as
+	 * per my knowledge ideal thread count per core should be 30 to 40 to avoid
+	 * performance hit.) number of threads.
+	 * 
+	 * Walking through all the files and submitting them to the ExecutorService to
+	 * execute as and when Thread is available.
+	 * 
+	 * At the end writing wordCount map to the file named WordCount.
+	 */
 	public void processWordCount() {
 		Long startTime = System.currentTimeMillis();
 		ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 30);

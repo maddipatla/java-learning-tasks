@@ -24,6 +24,17 @@ public class WordCountThread implements Runnable {
 		this.file = file;
 	}
 
+	/**
+	 * Read lines from file using Stream and nio API.
+	 * 
+	 * Split each line by one or more spaces to get words.
+	 * 
+	 * Replace all special characters in each word with empty String("")
+	 * 
+	 * Loop through the String array and check String exists in wordCount map if it
+	 * contains increment value otherwise put this word in the map with value as 1.
+	 * 
+	 */
 	@Override
 	public void run() {
 		try (Stream<String> stream = Files.lines(file)) {
@@ -46,13 +57,6 @@ public class WordCountThread implements Runnable {
 
 	public static ConcurrentMap<String, Long> getWordCount() {
 		return wordCount;
-	}
-
-	/**
-	 * @param wordCount
-	 */
-	public static void setWordCount(ConcurrentMap<String, Long> wordCount) {
-		WordCountThread.wordCount = wordCount;
 	}
 
 }
