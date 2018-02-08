@@ -21,14 +21,14 @@ public class LRUCache<K, V> {
 
 	/**
 	 * @param key
-	 * @return Employee
+	 * @return
 	 */
-	public V getEmployee(K key) {
+	public V getObject(K key) {
 		V value;
 		if (front != null && listSize < noOfPages) {
 			Node<K, V> existingNode = getNodeExists(key);
 			if (existingNode == null) {
-				Node<K, V> node = getEmployeeFromDB(key, front);
+				Node<K, V> node = getObjectFromDB(key, front);
 				value = node.getValue();
 				front.setPrev(node);
 				front = node;
@@ -38,7 +38,7 @@ public class LRUCache<K, V> {
 				noOfHits++;
 			}
 		} else if (front == null) {
-			Node<K, V> node = getEmployeeFromDB(key, front);
+			Node<K, V> node = getObjectFromDB(key, front);
 			value = node.getValue();
 			front = rear = node;
 		} else {
@@ -57,7 +57,7 @@ public class LRUCache<K, V> {
 
 	/**
 	 * @param key
-	 * @return Node
+	 * @return
 	 */
 	private Node<K, V> getNodeExists(K key) {
 		Node<K, V> node = front;
@@ -92,10 +92,10 @@ public class LRUCache<K, V> {
 
 	/**
 	 * @param key
-	 * @return Employee
+	 * @return
 	 */
 	private Node<K, V> processNonExistNode(K key) {
-		Node<K, V> node = getEmployeeFromDB(key, front);
+		Node<K, V> node = getObjectFromDB(key, front);
 		front.setPrev(node);
 		front = node;
 		rear = rear.getPrev();
@@ -105,10 +105,11 @@ public class LRUCache<K, V> {
 
 	/**
 	 * @param key
-	 * @return Employee
+	 * @param front
+	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	private Node<K, V> getEmployeeFromDB(K key, Node<K, V> front) {
+	private Node<K, V> getObjectFromDB(K key, Node<K, V> front) {
 		Employee employee = new Employee((Integer) key, "Employee-" + key, Double.valueOf(((Integer) key) * 5d));
 		return new Node<>(null, front, (K) employee.getId(), (V) employee);
 	}
