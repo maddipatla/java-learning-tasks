@@ -112,6 +112,12 @@ public class WikiCall {
 		this.position = position;
 	}
 
+	/**
+	 * Extract strings from a given file. If useForkJoin is true, use fork join
+	 * framework recurisveAction to make a call to Wiki and extract the description
+	 * from the json response and write it into a file.
+	 * 
+	 */
 	public void fetchStringsMakeWikiCallAndWrite() {
 		Long startTime = System.currentTimeMillis();
 		List<String> strings = getExtractedStrings();
@@ -122,6 +128,11 @@ public class WikiCall {
 		logger.info("Time taken: {}", System.currentTimeMillis() - startTime);
 	}
 
+	/**
+	 * 
+	 * @return list of strings from a given file as per the delimiter, position of
+	 *         the string and other parameters specified.
+	 */
 	public List<String> getExtractedStrings() {
 		List<String> strings = new ArrayList<>();
 		ExecutorService serviceToGetStrings = Executors.newSingleThreadExecutor();
@@ -145,6 +156,11 @@ public class WikiCall {
 	}
 
 	/**
+	 * This implementation uses executorService framework.
+	 * 
+	 * Make a call to Wiki for each and every string available in list and extract
+	 * the description from the json response and write it into a file.
+	 * 
 	 * @param strings
 	 */
 	public void makeWikiCallAndWriteToFiles(List<String> strings) {
