@@ -34,7 +34,7 @@ public class WikiCall {
 	static ForkJoinPool pool = new ForkJoinPool(Runtime.getRuntime().availableProcessors() * 30);
 
 	private Path filePath;
-	private String delimeter = null;
+	private String delimiter = null;
 	private Integer position = -1;
 	private Path outputFilePath;
 	private String wikiURLString;
@@ -84,31 +84,31 @@ public class WikiCall {
 
 	/**
 	 * @param filePath
-	 * @param delimeter
+	 * @param delimiter
 	 * @param outputFilePath
 	 * @param useForkJoin
 	 * @param wikiURLString
 	 */
-	public WikiCall(String filePath, String delimeter, String outputFilePath, boolean useForkJoin,
+	public WikiCall(String filePath, String delimiter, String outputFilePath, boolean useForkJoin,
 			String wikiURLString) {
 		this(filePath, outputFilePath, useForkJoin, wikiURLString);
-		if (delimeter.trim().isEmpty())
-			this.delimeter = DEFAULT_DELIMETER;
+		if (delimiter.trim().isEmpty())
+			this.delimiter = DEFAULT_DELIMETER;
 		else
-			this.delimeter = delimeter;
+			this.delimiter = delimiter;
 	}
 
 	/**
 	 * @param filePath
-	 * @param delimeter
+	 * @param delimiter
 	 * @param position
 	 * @param outputFilePath
 	 * @param useForkJoin
 	 * @param wikiURLString
 	 */
-	public WikiCall(String filePath, String delimeter, Integer position, String outputFilePath, boolean useForkJoin,
+	public WikiCall(String filePath, String delimiter, Integer position, String outputFilePath, boolean useForkJoin,
 			String wikiURLString) {
-		this(filePath, delimeter, outputFilePath, useForkJoin, wikiURLString);
+		this(filePath, delimiter, outputFilePath, useForkJoin, wikiURLString);
 		this.position = position;
 	}
 
@@ -128,7 +128,7 @@ public class WikiCall {
 		Future<List<String>> future;
 		if (position != -1)
 			future = serviceToGetStrings.submit(new ExtractStringsByDelimeterAndPosition(DEFAULT_FILE_ONE, "  ", 2));
-		else if (delimeter != null)
+		else if (delimiter != null)
 			future = serviceToGetStrings.submit(new ExtractStringsByDelimeter(DEFAULT_FILE_THREE, ",,,"));
 		else
 			future = serviceToGetStrings.submit(new ExtractStringsByNewLine(DEFAULT_FILE_TWO));
