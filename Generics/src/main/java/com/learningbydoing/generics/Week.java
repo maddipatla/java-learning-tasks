@@ -2,27 +2,30 @@ package com.learningbydoing.generics;
 
 /**
  * @author Maddipatla Chandra Babu
- * 
  * @date 07-Feb-2018
+ *
  */
-public enum Week {
-	MONDAY(new Byte("1")), TUESDAY(new Byte("2")), WEDNESDAY(new Byte("3")), THURSDAY(new Byte("4")), FRIDAY(
-			new Byte("5")), SATURDAY(new Byte("6")), SUNDAY(new Byte("7"));
+public enum Week implements GenericEnum {
 
-	private Byte value;
+    MONDAY((byte)1),
+    TUESDAY((byte)2),
+    WEDNESDAY((byte)3),
+    THURSDAY((byte)4),
+    FRIDAY((byte)5),
+    SATURDAY((byte)6),
+    SUNDAY((byte)7);
 
-	/**
-	 * 
-	 */
-	private Week(Byte value) {
-		this.value = value;
-	}
+    private Byte value;
 
-	public Week getInstanceByValue(Byte value) {
-		for (Week week : values()) {
-			if (week.value == value)
-				return week;
-		}
-		return null;
-	}
+    /**
+     *
+     */
+    private Week(Byte value) {
+        this.value = value;
+    }
+
+    public Byte getValue() {
+        return value;
+    }
+
 }
