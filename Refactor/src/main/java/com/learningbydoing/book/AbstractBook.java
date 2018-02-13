@@ -2,10 +2,9 @@ package com.learningbydoing.book;
 
 import java.io.Serializable;
 
+import com.learningbydoing.exception.DiscountDaysMoreThanRentDaysException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import com.learningbydoing.exception.DiscountDaysMoreThanRentDaysException;
 
 /**
  * @author Maddipatla Chandra Babu

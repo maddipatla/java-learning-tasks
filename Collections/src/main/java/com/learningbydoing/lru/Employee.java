@@ -2,11 +2,10 @@ package com.learningbydoing.lru;
 
 /**
  * @author Maddipatla Chandra Babu
- * 
  * @date 07-Feb-2018
  */
 public class Employee {
-	private int id;
+	private Integer id;
 	private String name;
 	private double salary;
 
@@ -28,7 +27,7 @@ public class Employee {
 	/**
 	 * @param id
 	 */
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -52,37 +51,6 @@ public class Employee {
 	 */
 	public void setSalary(double salary) {
 		this.salary = salary;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + id;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(salary);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Employee other = (Employee) obj;
-		if (id != other.id)
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		return (Double.doubleToLongBits(salary) != Double.doubleToLongBits(other.salary)) ? false : true;
 	}
 
 }

@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.learningbydoing.annotation;
 
@@ -10,12 +10,11 @@ import java.lang.annotation.Target;
 
 /**
  * @author Maddipatla Chandra Babu
- * 
  * @date 08-Feb-2018
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface Document {
-	String name();
-	
+    String name();
+
 }

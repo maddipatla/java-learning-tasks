@@ -2,7 +2,6 @@ package com.learningbydoing.lru.practice;
 
 /**
  * @author Maddipatla Chandra Babu
- * 
  * @date 07-Feb-2018
  */
 public class Node {

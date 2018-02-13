@@ -11,7 +11,6 @@ import org.apache.logging.log4j.Logger;
 
 /**
  * @author Maddipatla Chandra Babu
- * 
  * @date 07-Feb-2018
  */
 public class InterviewScheduler {

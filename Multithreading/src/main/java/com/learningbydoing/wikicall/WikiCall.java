@@ -14,12 +14,11 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.Future;
 
+import com.learningbydoing.exception.NoFileExtensionException;
+import com.learningbydoing.exception.NoPathExistException;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import com.learningbydoing.exception.NoFileExtensionException;
-import com.learningbydoing.exception.NoPathExistException;
 
 public class WikiCall {
 	static final Logger logger = LogManager.getLogger(WikiCall.class.getName());

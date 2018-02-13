@@ -1,9 +1,8 @@
 package com.learningbydoing.book;
 
+import com.learningbydoing.exception.TypeRequiredException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import com.learningbydoing.exception.TypeRequiredException;
 
 /**
  * @author Maddipatla Chandra Babu

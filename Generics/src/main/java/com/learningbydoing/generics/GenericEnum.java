@@ -15,9 +15,9 @@ public interface GenericEnum {
     <T> T getValue();
 
     public static GenericEnum getInstance(Class<? extends GenericEnum> enumType,
-                                                Object name) {
-        for (GenericEnum constant: enumType.getEnumConstants()) {
-            if(constant.getValue().equals(name))
+                                          Object name) {
+        for (GenericEnum constant : enumType.getEnumConstants()) {
+            if (constant.getValue().equals(name))
                 return constant;
         }
         logger.warn("Enum not found for : {} and value: {}", enumType, name);

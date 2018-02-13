@@ -7,7 +7,6 @@ import java.util.List;
 
 /**
  * @author Maddipatla Chandra Babu
- * 
  * @date 07-Feb-2018
  */
 public class Person {

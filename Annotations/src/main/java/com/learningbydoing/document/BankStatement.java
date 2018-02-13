@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.learningbydoing.document;
 
@@ -15,14 +15,13 @@ import com.learningbydoing.annotation.NotNull;
 
 /**
  * @author Maddipatla Chandra Babu
- * 
  * @date 08-Feb-2018
  */
 @Document(name = "Bank Statement")
 public class BankStatement implements Serializable, com.learningbydoing.document.Document {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -2314331691893052921L;
 
@@ -36,24 +35,24 @@ public class BankStatement implements Serializable, com.learningbydoing.document
 	}
 
 	@NotNull
-	@Name
 	private String name;
 
 	@NotNull
 	private Long accountNumber;
 
 	@NotNull
-	@DateOfBirth
+	@DateOfBirth(type = Date.class)
 	private Date dateOfBirth;
 
 	@NotNull
-	@Email
+	@Email(type = String.class)
 	private String email;
 
 	@NotNull
-	@Mobile
+	@Mobile(type = Long.class)
 	private Long phoneNumber;
 
+	@Name(type = String.class)
 	public String getName() {
 		return name;
 	}
@@ -92,6 +91,12 @@ public class BankStatement implements Serializable, com.learningbydoing.document
 
 	public void setPhoneNumber(Long phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+
+	@Override
+	public String toString() {
+		return "BankStatement [name=" + name + ", accountNumber=" + accountNumber + ", dateOfBirth=" + dateOfBirth
+				+ ", email=" + email + ", phoneNumber=" + phoneNumber + "]";
 	}
 
 }
