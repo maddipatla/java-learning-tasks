@@ -20,8 +20,8 @@ public class NameValidator extends AbstractValidator {
 
 	@Override
 	public boolean isAllDocumentsHaveConsistentDataAgainstAadhaar() {
-		return GenericValidator.validateAnnotationOnField(documents, Name.class, name)
-				&& GenericValidator.validateAnnotationOnMethod(documents, Name.class, name);
+		return validateAnnotationOnField(documents, Name.class, name)
+				&& validateAnnotationOnMethod(documents, Name.class, name);
 	}
 
 }

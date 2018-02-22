@@ -20,8 +20,8 @@ public class DateOfBirthValidator extends AbstractValidator {
 
 	@Override
 	public boolean isAllDocumentsHaveConsistentDataAgainstAadhaar() {
-		return GenericValidator.validateAnnotationOnField(documents, DateOfBirth.class, dateOfBirth)
-				&& GenericValidator.validateAnnotationOnMethod(documents, DateOfBirth.class, dateOfBirth);
+		return validateAnnotationOnField(documents, DateOfBirth.class, dateOfBirth)
+				&& validateAnnotationOnMethod(documents, DateOfBirth.class, dateOfBirth);
 	}
 
 }
