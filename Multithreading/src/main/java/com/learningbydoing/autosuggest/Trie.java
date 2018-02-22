@@ -16,7 +16,7 @@ public class Trie {
 
 	private TrieNode root;
 
-	public void addWord(String word) {
+	public synchronized void addWord(String word) {
 		if (root == null) {
 			root = new TrieNode(' ');
 		}
