@@ -20,8 +20,7 @@ public class EmailValidator extends AbstractValidator {
 
 	@Override
 	public boolean isAllDocumentsHaveConsistentDataAgainstAadhaar() {
-		return validateAnnotationOnField(documents, Email.class, email)
-				&& validateAnnotationOnMethod(documents, Email.class, email);
+		return validateAnnotationOnField(Email.class, email) && validateAnnotationOnMethod(Email.class, email);
 	}
 
 }

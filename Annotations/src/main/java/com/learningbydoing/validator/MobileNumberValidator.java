@@ -20,8 +20,8 @@ public class MobileNumberValidator extends AbstractValidator {
 
 	@Override
 	public boolean isAllDocumentsHaveConsistentDataAgainstAadhaar() {
-		return validateAnnotationOnField(documents, Mobile.class, mobileNumber)
-				&& validateAnnotationOnMethod(documents, Mobile.class, mobileNumber);
+		return validateAnnotationOnField(Mobile.class, mobileNumber)
+				&& validateAnnotationOnMethod(Mobile.class, mobileNumber);
 	}
 
 }

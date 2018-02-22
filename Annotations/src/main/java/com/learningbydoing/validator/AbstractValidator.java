@@ -39,8 +39,8 @@ public abstract class AbstractValidator implements Validator {
 		this.documents = documents;
 		isAllDocumentsValid();
 		isDocumentsContainAadhaar();
-		validateAnnotationOnField(documents, NotNull.class, null);
-		validateAnnotationOnMethod(documents, NotNull.class, null);
+		validateAnnotationOnField(NotNull.class, null);
+		validateAnnotationOnMethod(NotNull.class, null);
 	}
 
 	public boolean isAllDocumentsValid() {
@@ -69,8 +69,7 @@ public abstract class AbstractValidator implements Validator {
 
 	}
 
-	protected boolean validateAnnotationOnField(List<Document> documents, Class<? extends Annotation> annotation,
-			Object baseFieldToValidate) {
+	protected boolean validateAnnotationOnField(Class<? extends Annotation> annotation, Object baseFieldToValidate) {
 		for (Document document : documents) {
 			if (!(document instanceof Aadhaar)) {
 				Field[] fields = document.getClass().getDeclaredFields();
@@ -106,8 +105,7 @@ public abstract class AbstractValidator implements Validator {
 
 	}
 
-	protected boolean validateAnnotationOnMethod(List<Document> documents, Class<? extends Annotation> annotation,
-			Object baseFieldToValidate) {
+	protected boolean validateAnnotationOnMethod(Class<? extends Annotation> annotation, Object baseFieldToValidate) {
 		for (Document document : documents) {
 			if (!(document instanceof Aadhaar)) {
 				Method[] methods = document.getClass().getDeclaredMethods();
