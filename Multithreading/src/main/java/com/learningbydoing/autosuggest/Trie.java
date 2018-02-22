@@ -14,6 +14,15 @@ import java.util.ListIterator;
  */
 public class Trie {
 
+	private static Trie instance;
+
+	static {
+		instance = new Trie();
+	}
+
+	private Trie() {
+	}
+
 	private TrieNode root;
 
 	public synchronized void addWord(String word) {
@@ -88,7 +97,10 @@ public class Trie {
 			}
 			return list;
 		}
+	}
 
+	public static Trie getInstance() {
+		return instance;
 	}
 
 }

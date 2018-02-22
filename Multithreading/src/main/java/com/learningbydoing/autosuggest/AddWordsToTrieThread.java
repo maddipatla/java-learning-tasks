@@ -40,7 +40,7 @@ public class AddWordsToTrieThread implements Runnable {
 				for (String string : strings) {
 					String stringWithOnlyAlphabet = string.replaceAll("[^A-Za-z]", "").trim();
 					if (!stringWithOnlyAlphabet.trim().isEmpty()) {
-						AutoSuggest.trie.addWord(stringWithOnlyAlphabet);
+						AutoSuggest.addWordToTrie(stringWithOnlyAlphabet);
 					}
 				}
 			});

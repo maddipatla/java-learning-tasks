@@ -9,15 +9,13 @@ public class AutoSuggest {
 
 	private static final Logger logger = LogManager.getLogger(AutoSuggest.class);
 
-	public static Trie trie = new Trie();
-
 	public AutoSuggest() {
 		super();
 		new FilesProcessor().process();
 	}
 
 	public List<String> searchWordsWithPrefix(String prefixWord) {
-		List<String> matches = trie.search(prefixWord);
+		List<String> matches = Trie.getInstance().search(prefixWord);
 		if (matches.isEmpty()) {
 			logger.info("No matches found the given prefix!");
 		} else {
@@ -25,4 +23,9 @@ public class AutoSuggest {
 		}
 		return matches;
 	}
+
+	public static void addWordToTrie(String word) {
+		Trie.getInstance().addWord(word);
+	}
+
 }
