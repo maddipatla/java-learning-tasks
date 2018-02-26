@@ -44,7 +44,7 @@ public class Trie {
 					if (node.getCharacter() >= c)
 						break;
 				}
-				if (node.getCharacter() == c) {
+				if (node != null && node.getCharacter() == c) {
 					start = node;
 				} else {
 					TrieNode newNode = new TrieNode(c);

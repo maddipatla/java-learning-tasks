@@ -43,10 +43,8 @@ public class WordCountThread implements Runnable {
 				for (String string : strings) {
 					String stringWithOnlyAlphaNumeric = string.replaceAll("[^A-Za-z0-9]", "").trim();
 					if (!stringWithOnlyAlphaNumeric.trim().isEmpty()) {
-						if (wordCount.containsKey(stringWithOnlyAlphaNumeric))
-							wordCount.put(stringWithOnlyAlphaNumeric, wordCount.get(stringWithOnlyAlphaNumeric) + 1);
-						else
-							wordCount.put(stringWithOnlyAlphaNumeric, 1L);
+						wordCount.compute(stringWithOnlyAlphaNumeric, (key,
+								value) -> (value == null) ? wordCount.put(key, 1L) : wordCount.put(key, value + 1));
 					}
 				}
 			});
