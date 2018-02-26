@@ -55,7 +55,7 @@ public class WriteThread implements Runnable {
 				}
 				counter = 1L;
 				Files.write(Paths.get(outputFilePath + File.separator + "File-" + fileCounter++), strings,
-						StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+						StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
 				strings.clear();
 			} while (!ReadThread.queue.isEmpty());
 		} catch (InterruptedException | IOException e) {
