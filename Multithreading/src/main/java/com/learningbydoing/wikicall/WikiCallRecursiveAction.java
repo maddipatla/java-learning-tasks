@@ -51,11 +51,10 @@ public class WikiCallRecursiveAction extends RecursiveAction {
 	private List<WikiCallRecursiveAction> createSubtasks() {
 		List<WikiCallRecursiveAction> subtasks = new ArrayList<>();
 
-		List<String> partOne = strings.subList(0, strings.size() / 2);
-		List<String> partTwo = strings.subList(strings.size() / 2, strings.size());
-
-		subtasks.add(new WikiCallRecursiveAction(partOne, wikiURLString, outputFilePath));
-		subtasks.add(new WikiCallRecursiveAction(partTwo, wikiURLString, outputFilePath));
+		subtasks.add(
+				new WikiCallRecursiveAction(strings.subList(0, strings.size() / 2), wikiURLString, outputFilePath));
+		subtasks.add(new WikiCallRecursiveAction(strings.subList(strings.size() / 2, strings.size()), wikiURLString,
+				outputFilePath));
 
 		return subtasks;
 	}
