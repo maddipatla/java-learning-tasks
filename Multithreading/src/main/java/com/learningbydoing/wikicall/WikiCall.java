@@ -14,11 +14,13 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.Future;
 
-import com.learningbydoing.exception.NoFileExtensionException;
-import com.learningbydoing.exception.NoPathExistException;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import com.learningbydoing.exception.NoFileExtensionException;
+import com.learningbydoing.exception.NoPathExistException;
+import com.learningbydoing.util.ThreadUtil;
 
 public class WikiCall {
 	static final Logger logger = LogManager.getLogger(WikiCall.class.getName());
@@ -29,8 +31,6 @@ public class WikiCall {
 
 	public static final String WIKI_DEFAULT_URL_STRING = "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=";
 	private static final String DEFAULT_DELIMETER = "\\s{2}";
-
-	static ForkJoinPool pool = new ForkJoinPool(Runtime.getRuntime().availableProcessors() * 30);
 
 	private Path filePath;
 	private String delimiter = null;
@@ -120,9 +120,11 @@ public class WikiCall {
 	public void fetchStringsMakeWikiCallAndWrite() {
 		Long startTime = System.currentTimeMillis();
 		List<String> strings = getExtractedStrings();
-		if (useForkJoin)
+		if (useForkJoin) {
+			Integer size = strings.size();
+			ForkJoinPool pool = new ForkJoinPool(ThreadUtil.getThreadCountToCreate(size.longValue()));
 			pool.invoke(new WikiCallRecursiveAction(strings, wikiURLString, outputFilePath));
-		else
+		} else
 			makeWikiCallAndWriteToFiles(strings);
 		logger.info("Time taken: {}", System.currentTimeMillis() - startTime);
 	}
@@ -163,7 +165,8 @@ public class WikiCall {
 	 * @param strings
 	 */
 	public void makeWikiCallAndWriteToFiles(List<String> strings) {
-		ExecutorService service = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 30);
+		Integer size = strings.size();
+		ExecutorService service = Executors.newFixedThreadPool(ThreadUtil.getThreadCountToCreate(size.longValue()));
 		for (String string : strings) {
 			service.execute(new WikiCallThread(string, wikiURLString, outputFilePath));
 		}

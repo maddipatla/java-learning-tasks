@@ -13,6 +13,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.learningbydoing.exception.NoPathExistException;
+import com.learningbydoing.util.ThreadUtil;
 
 /**
  * @author Maddipatla Chandra Babu
@@ -58,12 +59,19 @@ public class FilesProcessor {
 	 */
 	public void process() {
 		Long startTime = System.currentTimeMillis();
-		ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 30);
+		Long totalFiles = 0L;
+		try (Stream<Path> paths = Files.walk(filesPath)) {
+			totalFiles = paths.filter(Files::isRegularFile).count();
+		} catch (IOException e) {
+			logger.warn("Exception in WordCount.process(): {}", e.getMessage());
+		}
+
+		ExecutorService executorService = Executors.newFixedThreadPool(ThreadUtil.getThreadCountToCreate(totalFiles));
 
 		try (Stream<Path> paths = Files.walk(filesPath)) {
 			paths.filter(Files::isRegularFile).forEach(file -> executorService.execute(new AddWordsToTrieThread(file)));
 		} catch (IOException e) {
-			logger.warn("Exception in WordCount.processWordCount(): {}", e.getMessage());
+			logger.warn("Exception in WordCount.process(): {}", e.getMessage());
 		}
 
 		executorService.shutdown();
